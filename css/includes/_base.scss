@@ -34,7 +34,7 @@
 :root {
     --tblr-light: #fafbfc;
     --tblr-dark: #101923;
-    --tblr-primary-rgb: 254, 201, 92;
+    --tblr-primary-rgb: 0, 120, 215;
     --tblr-primary: rgb(var(--tblr-primary-rgb));
     --tblr-primary-fg: #1e293b;
     --tblr-primary-darken: color-mix(in srgb, var(--tblr-primary), black 10%);
@@ -70,7 +70,7 @@
     --glpi-logo-light-login: url("../pics/logos/logo-GLPI-250-white.png");
     --glpi-logo: var(--glpi-logo-light);
     --glpi-logo-reduced: var(--glpi-logo-light-reduced);
-    --glpi-mainmenu-bg: #2f3f64; // hsl(222, 36%, 29%)
+    --glpi-mainmenu-bg: #005a8c; // Medical blue
     --glpi-mainmenu-fg: #f4f6fa;
     --glpi-mainmenu-fg-muted: #f4f6fa99;
     --glpi-mainmenu-active-bg: color-mix(in srgb, var(--glpi-mainmenu-bg), white 45%);
