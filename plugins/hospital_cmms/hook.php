@@ -173,6 +173,39 @@ function plugin_hospital_cmms_install() {
         KEY `plugin_hospital_cmms_categories_id` (`plugin_hospital_cmms_categories_id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
+    // Subscriptions table
+    $queries[] = "CREATE TABLE IF NOT EXISTS `glpi_plugin_hospital_cmms_subscriptions` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `hospital_name` varchar(255) NOT NULL DEFAULT '',
+        `contact_name` varchar(255) NOT NULL DEFAULT '',
+        `email` varchar(255) NOT NULL DEFAULT '',
+        `phone` varchar(50) NOT NULL DEFAULT '',
+        `country` varchar(50) NOT NULL DEFAULT '',
+        `login` varchar(100) NOT NULL DEFAULT '',
+        `password_hash` varchar(255) NOT NULL DEFAULT '',
+        `plan` varchar(50) NOT NULL DEFAULT 'basic',
+        `status` varchar(50) NOT NULL DEFAULT 'trial',
+        `trial_start` datetime DEFAULT NULL,
+        `trial_end` datetime DEFAULT NULL,
+        `subscription_start` datetime DEFAULT NULL,
+        `subscription_end` datetime DEFAULT NULL,
+        `payment_method` varchar(50) NOT NULL DEFAULT '',
+        `last_payment_date` datetime DEFAULT NULL,
+        `next_payment_date` datetime DEFAULT NULL,
+        `users_id` int(11) NOT NULL DEFAULT '0',
+        `entities_id` int(11) NOT NULL DEFAULT '-1',
+        `is_active` tinyint(1) NOT NULL DEFAULT '1',
+        `date_creation` datetime DEFAULT NULL,
+        `date_mod` datetime DEFAULT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `unique_email` (`email`),
+        UNIQUE KEY `unique_login` (`login`),
+        KEY `status` (`status`),
+        KEY `plan` (`plan`),
+        KEY `trial_end` (`trial_end`),
+        KEY `users_id` (`users_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
     foreach ($queries as $query) {
         $DB->query($query) or die($DB->error());
     }
@@ -251,6 +284,7 @@ function plugin_hospital_cmms_uninstall() {
     global $DB;
 
     $queries = [
+        "DROP TABLE IF EXISTS `glpi_plugin_hospital_cmms_subscriptions`",
         "DROP TABLE IF EXISTS `glpi_plugin_hospital_cmms_user_departments`",
         "DROP TABLE IF EXISTS `glpi_plugin_hospital_cmms_maintenance_history`",
         "DROP TABLE IF EXISTS `glpi_plugin_hospital_cmms_maintenance_tasks`",

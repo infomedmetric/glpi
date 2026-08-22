@@ -38,6 +38,11 @@ function plugin_init_hospital_cmms() {
             'tools'  => 'PluginHospitalCmmsMaintenanceTask',
         ];
 
+        // Add subscription menu for admins
+        if (Session::haveRight('config', UPDATE)) {
+            $PLUGIN_HOOKS['menu_toadd']['hospital_cmms']['config'] = 'PluginHospitalCmmsSubscription';
+        }
+
         // Add submenu for department management
         $PLUGIN_HOOKS['submenu_entry']['admin']['options']['hospital_cmms_departments'] = [
             'title'  => __('Department Management'),
