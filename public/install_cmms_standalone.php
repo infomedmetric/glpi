@@ -100,6 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $error = 'Schema import failed:<br>'
                                        . htmlspecialchars(implode('<br>', array_slice($import_result['messages'], -5)));
                             } else {
+                                // Import GLPI default data (users, configs, profiles, etc.)
+                                require_once __DIR__ . '/install_default_data.php';
+                                $data_result = importDefaultData($link, $db_name);
+
                                 // Run CMMS taxonomy seed (non-critical)
                                 $seed_errors = runSeedScript($db_host, $db_user, $db_pass, $db_name);
 

@@ -312,6 +312,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
+            // Import GLPI default data (users, configs, profiles, etc.)
+            require_once __DIR__ . '/install_default_data.php';
+            importDefaultData($link, $db_escaped);
+
             // Run CMMS seed (non-critical)
             runSeedScript($install['db_host'], $install['db_user'], $install['db_pass'], $install['db_name']);
 
