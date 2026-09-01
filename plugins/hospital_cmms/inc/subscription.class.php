@@ -108,7 +108,7 @@ class PluginHospitalCmmsSubscription extends CommonDBTM {
 
             // Calculate trial end date
             $trial_start = date('Y-m-d H:i:s');
-            $trial_end = date('Y-m-d H:i:s', strtotime("+{$this::TRIAL_DAYS} days"));
+            $trial_end = date('Y-m-d H:i:s', strtotime("+{self::TRIAL_DAYS} days"));
 
             // Insert subscription
             $subscriptionId = $DB->insert(static::getTable(), [
