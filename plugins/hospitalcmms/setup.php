@@ -92,14 +92,3 @@ function plugin_version_hospitalcmms() {
     ];
 }
 
-/**
- * Plugin uninstall
- */
-function plugin_hospitalcmms_uninstall() {
-    // Clean configuration
-    $query = "DELETE FROM `glpi_configs` WHERE `context` = 'plugin:hospitalcmms'";
-    $DB = DBmysql::getInstance();
-    $DB->query($query);
-
-    return true;
-}

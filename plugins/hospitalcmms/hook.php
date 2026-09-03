@@ -207,7 +207,7 @@ function plugin_hospitalcmms_install() {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
     foreach ($queries as $query) {
-        $DB->query($query) or die($DB->error());
+        $DB->doQuery($query);
     }
 
     // Update app name in config
@@ -295,7 +295,7 @@ function plugin_hospitalcmms_uninstall() {
     ];
 
     foreach ($queries as $query) {
-        $DB->query($query) or die($DB->error());
+        $DB->doQuery($query);
     }
 
     return true;
