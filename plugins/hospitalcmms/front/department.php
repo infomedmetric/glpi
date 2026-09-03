@@ -11,6 +11,6 @@ include("../../../inc/includes.php");
 
 Session::checkLoginUser();
 
-$dropdown = new PluginHospitalCmmsCategory();
+$dropdown = new PluginHospitalcmmsCategory();
 
 include(GLPI_ROOT . "/front/dropdown.common.php");

@@ -16,9 +16,9 @@ if (!defined('GLPI_ROOT')) {
  *
  * Manages hospital subscriptions, free trials, and billing.
  */
-class PluginHospitalCmmsSubscription extends CommonDBTM {
+class PluginHospitalcmmsSubscription extends CommonDBTM {
 
-    public static $rightname = 'plugin_hospital_cmms_subscriptions';
+    public static $rightname = 'plugin_hospitalcmms_subscriptions';
 
     /**
      * Subscription statuses
@@ -228,14 +228,14 @@ class PluginHospitalCmmsSubscription extends CommonDBTM {
         global $DB;
 
         // Assign user as admin to all departments
-        $departments = new PluginHospitalCmmsCategory();
+        $departments = new PluginHospitalcmmsCategory();
         $iterator = $departments->find(['is_active' => 1]);
 
         foreach ($iterator as $dept) {
-            $DB->insert('glpi_plugin_hospital_cmms_user_departments', [
+            $DB->insert('glpi_plugin_hospitalcmms_user_departments', [
                 'users_id'                      => $userId,
-                'plugin_hospital_cmms_categories_id' => $dept['id'],
-                'role'                          => PluginHospitalCmmsPermission::ROLE_ADMIN,
+                'plugin_hospitalcmms_categories_id' => $dept['id'],
+                'role'                          => PluginHospitalcmmsPermission::ROLE_ADMIN,
                 'entities_id'                   => -1,
                 'date_creation'                 => date('Y-m-d H:i:s'),
             ]);
@@ -363,7 +363,7 @@ class PluginHospitalCmmsSubscription extends CommonDBTM {
                     <p>Your 20-day free trial of Hospital CMMS has expired.</p>
                     <p>To continue using the system, please upgrade to a paid plan.</p>
                     <p style='text-align: center; margin: 30px 0;'>
-                        <a href='" . $CFG_GLPI['root_doc'] . "/plugins/hospital_cmms/front/subscription.php' class='button'>Upgrade Now</a>
+                        <a href='" . $CFG_GLPI['root_doc'] . "/plugins/hospitalcmms/front/subscription.php' class='button'>Upgrade Now</a>
                     </p>
                 </div>
                 <div class='footer'>
@@ -400,7 +400,7 @@ class PluginHospitalCmmsSubscription extends CommonDBTM {
         // Total equipment
         $iterator = $DB->request([
             'SELECT' => ['COUNT(*) AS total'],
-            'FROM'   => PluginHospitalCmmsMedicalEquipment::getTable(),
+            'FROM'   => PluginHospitalcmmsMedicalEquipment::getTable(),
             'WHERE'  => ['is_deleted' => 0],
         ]);
         $stats['total_equipment'] = $iterator->current()['total'] ?? 0;
@@ -408,7 +408,7 @@ class PluginHospitalCmmsSubscription extends CommonDBTM {
         // Total maintenance tasks
         $iterator = $DB->request([
             'SELECT' => ['COUNT(*) AS total'],
-            'FROM'   => PluginHospitalCmmsMaintenanceTask::getTable(),
+            'FROM'   => PluginHospitalcmmsMaintenanceTask::getTable(),
             'WHERE'  => ['is_active' => 1],
         ]);
         $stats['total_maintenance'] = $iterator->current()['total'] ?? 0;

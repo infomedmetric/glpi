@@ -20,9 +20,9 @@ if (!defined('GLPI_ROOT')) {
  *
  * Controls access to medical equipment based on department membership.
  */
-class PluginHospitalCmmsPermission extends CommonDBTM {
+class PluginHospitalcmmsPermission extends CommonDBTM {
 
-    public static $rightname = 'plugin_hospital_cmms_permissions';
+    public static $rightname = 'plugin_hospitalcmms_permissions';
 
     /**
      * User roles
@@ -40,10 +40,10 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
 
         $iterator = $DB->request([
             'SELECT' => ['role'],
-            'FROM'   => 'glpi_plugin_hospital_cmms_user_departments',
+            'FROM'   => 'glpi_plugin_hospitalcmms_user_departments',
             'WHERE'  => [
                 'users_id'                      => $userId,
-                'plugin_hospital_cmms_categories_id' => $departmentId,
+                'plugin_hospitalcmms_categories_id' => $departmentId,
             ],
         ]);
 
@@ -70,7 +70,7 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
         if (Session::haveRight('config', UPDATE)) {
             $iterator = $DB->request([
                 'SELECT' => ['id', 'name'],
-                'FROM'   => PluginHospitalCmmsCategory::getTable(),
+                'FROM'   => PluginHospitalcmmsCategory::getTable(),
                 'WHERE'  => ['is_active' => 1],
                 'ORDER'  => 'name ASC',
             ]);
@@ -79,14 +79,14 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
 
         $iterator = $DB->request([
             'SELECT' => [
-                'ud.plugin_hospital_cmms_categories_id',
+                'ud.plugin_hospitalcmms_categories_id',
                 'c.name',
             ],
-            'FROM'       => 'glpi_plugin_hospital_cmms_user_departments AS ud',
+            'FROM'       => 'glpi_plugin_hospitalcmms_user_departments AS ud',
             'LEFT JOIN'  => [
-                PluginHospitalCmmsCategory::getTable() . ' AS c' => [
+                PluginHospitalcmmsCategory::getTable() . ' AS c' => [
                     'FKEY' => [
-                        'ud' => 'plugin_hospital_cmms_categories_id',
+                        'ud' => 'plugin_hospitalcmms_categories_id',
                         'c'  => 'id'
                     ]
                 ]
@@ -138,15 +138,15 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
         if (Session::haveRight('config', UPDATE)) {
             $iterator = $DB->request([
                 'SELECT' => ['id'],
-                'FROM'   => PluginHospitalCmmsCategory::getTable(),
+                'FROM'   => PluginHospitalcmmsCategory::getTable(),
                 'WHERE'  => ['is_active' => 1],
             ]);
             return $iterator;
         }
 
         $iterator = $DB->request([
-            'SELECT' => ['plugin_hospital_cmms_categories_id'],
-            'FROM'   => 'glpi_plugin_hospital_cmms_user_departments',
+            'SELECT' => ['plugin_hospitalcmms_categories_id'],
+            'FROM'   => 'glpi_plugin_hospitalcmms_user_departments',
             'WHERE'  => [
                 'users_id' => $userId,
                 'role'     => self::ROLE_DEPARTMENT_HEAD,
@@ -166,17 +166,17 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
         $existing = self::getUserRole($userId, $departmentId);
         if ($existing !== null) {
             // Update existing assignment
-            $DB->update('glpi_plugin_hospital_cmms_user_departments', [
+            $DB->update('glpi_plugin_hospitalcmms_user_departments', [
                 'role' => $role,
             ], [
                 'users_id'                      => $userId,
-                'plugin_hospital_cmms_categories_id' => $departmentId,
+                'plugin_hospitalcmms_categories_id' => $departmentId,
             ]);
         } else {
             // Add new assignment
-            $DB->insert('glpi_plugin_hospital_cmms_user_departments', [
+            $DB->insert('glpi_plugin_hospitalcmms_user_departments', [
                 'users_id'                      => $userId,
-                'plugin_hospital_cmms_categories_id' => $departmentId,
+                'plugin_hospitalcmms_categories_id' => $departmentId,
                 'role'                          => $role,
             ]);
         }
@@ -190,9 +190,9 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
     public static function removeUserFromDepartment($userId, $departmentId) {
         global $DB;
 
-        $DB->delete('glpi_plugin_hospital_cmms_user_departments', [
+        $DB->delete('glpi_plugin_hospitalcmms_user_departments', [
             'users_id'                      => $userId,
-            'plugin_hospital_cmms_categories_id' => $departmentId,
+            'plugin_hospitalcmms_categories_id' => $departmentId,
         ]);
 
         return true;
@@ -216,7 +216,7 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
         $departments = self::getUserDepartments($userId);
         $departmentIds = [];
         foreach ($departments as $dept) {
-            $departmentIds[] = $dept['plugin_hospital_cmms_categories_id'];
+            $departmentIds[] = $dept['plugin_hospitalcmms_categories_id'];
         }
 
         if (empty($departmentIds)) {
@@ -225,7 +225,7 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
         }
 
         return [
-            'plugin_hospital_cmms_categories_id' => $departmentIds,
+            'plugin_hospitalcmms_categories_id' => $departmentIds,
         ];
     }
 
@@ -250,8 +250,8 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
 
         // Check if user is department head or technician in any department
         $iterator = $DB->request([
-            'SELECT' => ['plugin_hospital_cmms_categories_id', 'role'],
-            'FROM'   => 'glpi_plugin_hospital_cmms_user_departments',
+            'SELECT' => ['plugin_hospitalcmms_categories_id', 'role'],
+            'FROM'   => 'glpi_plugin_hospitalcmms_user_departments',
             'WHERE'  => [
                 'users_id' => $userId,
                 'role'     => [self::ROLE_DEPARTMENT_HEAD, self::ROLE_TECHNICIAN],
@@ -260,13 +260,13 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
 
         $managedDepartments = [];
         foreach ($iterator as $row) {
-            $managedDepartments[] = $row['plugin_hospital_cmms_categories_id'];
+            $managedDepartments[] = $row['plugin_hospitalcmms_categories_id'];
         }
 
         if (!empty($managedDepartments)) {
             // Department heads/technicians see all equipment in their departments
             $conditions[] = [
-                'plugin_hospital_cmms_categories_id' => $managedDepartments,
+                'plugin_hospitalcmms_categories_id' => $managedDepartments,
             ];
         }
 
@@ -299,14 +299,14 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
 
         // Get equipment details
         $iterator = $DB->request([
-            'SELECT' => ['plugin_hospital_cmms_categories_id', 'users_id', 'users_id_tech'],
-            'FROM'   => PluginHospitalCmmsMedicalEquipment::getTable(),
+            'SELECT' => ['plugin_hospitalcmms_categories_id', 'users_id', 'users_id_tech'],
+            'FROM'   => PluginHospitalcmmsMedicalEquipment::getTable(),
             'WHERE'  => ['id' => $equipmentId],
         ]);
 
         if (count($iterator)) {
             $equipment = $iterator->current();
-            $departmentId = $equipment['plugin_hospital_cmms_categories_id'];
+            $departmentId = $equipment['plugin_hospitalcmms_categories_id'];
 
             // Department heads can modify equipment in their department
             if (self::isDepartmentHead($userId, $departmentId)) {
@@ -365,7 +365,7 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
                 'u.realname',
                 'u.firstname',
             ],
-            'FROM'       => 'glpi_plugin_hospital_cmms_user_departments AS ud',
+            'FROM'       => 'glpi_plugin_hospitalcmms_user_departments AS ud',
             'LEFT JOIN'  => [
                 'glpi_users AS u' => [
                     'FKEY' => [
@@ -375,7 +375,7 @@ class PluginHospitalCmmsPermission extends CommonDBTM {
                 ]
             ],
             'WHERE'      => [
-                'ud.plugin_hospital_cmms_categories_id' => $departmentId,
+                'ud.plugin_hospitalcmms_categories_id' => $departmentId,
             ],
             'ORDER'      => 'u.name ASC',
         ]);

@@ -17,7 +17,7 @@ if (!defined('GLPI_ROOT')) {
  * Manages hospital departments as categories for medical equipment.
  * Supports hierarchical department structure (e.g., Surgery > Cardiac Surgery).
  */
-class PluginHospitalCmmsCategory extends CommonTreeDropdown {
+class PluginHospitalcmmsCategory extends CommonTreeDropdown {
 
     // From CommonDBTM
     public $dohistory = true;

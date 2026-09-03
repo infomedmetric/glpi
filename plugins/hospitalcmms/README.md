@@ -36,7 +36,7 @@ A GLPI plugin to convert GLPI into a hospital-focused CMMS for managing medical 
 
 ## Installation
 
-1. Copy the `hospital_cmms` folder to GLPI's `plugins/` directory
+1. Copy the `hospitalcmms` folder to GLPI's `plugins/` directory
 2. Go to **Setup > Plugins** in GLPI
 3. Find **Hospital CMMS** and click **Install**
 4. Activate the plugin
@@ -45,12 +45,12 @@ A GLPI plugin to convert GLPI into a hospital-focused CMMS for managing medical 
 
 | Table | Description |
 |-------|-------------|
-| `glpi_plugin_hospital_cmms_categories` | Hospital departments (hierarchical) |
-| `glpi_plugin_hospital_cmms_types` | Medical equipment types |
-| `glpi_plugin_hospital_cmms_models` | Medical equipment models |
-| `glpi_plugin_hospital_cmms_equipments` | Medical equipment records |
-| `glpi_plugin_hospital_cmms_maintenance_tasks` | Preventive maintenance schedules |
-| `glpi_plugin_hospital_cmms_maintenance_history` | Maintenance execution history |
+| `glpi_plugin_hospitalcmms_categories` | Hospital departments (hierarchical) |
+| `glpi_plugin_hospitalcmms_types` | Medical equipment types |
+| `glpi_plugin_hospitalcmms_models` | Medical equipment models |
+| `glpi_plugin_hospitalcmms_equipments` | Medical equipment records |
+| `glpi_plugin_hospitalcmms_maintenance_tasks` | Preventive maintenance schedules |
+| `glpi_plugin_hospitalcmms_maintenance_history` | Maintenance execution history |
 
 ## Default Data
 
@@ -196,22 +196,22 @@ The following search options are available for medical equipment:
 
 ### Get Equipment by Department
 ```php
-$equipment = PluginHospitalCmmsMedicalEquipment::getEquipmentByDepartment($departmentId);
+$equipment = PluginHospitalcmmsMedicalEquipment::getEquipmentByDepartment($departmentId);
 ```
 
 ### Get Equipment Needing Calibration
 ```php
-$equipment = PluginHospitalCmmsMedicalEquipment::getEquipmentNeedingCalibration($days = 30);
+$equipment = PluginHospitalcmmsMedicalEquipment::getEquipmentNeedingCalibration($days = 30);
 ```
 
 ### Get Upcoming Maintenance Tasks
 ```php
-$tasks = PluginHospitalCmmsMaintenanceTask::getUpcomingTasks($days = 30);
+$tasks = PluginHospitalcmmsMaintenanceTask::getUpcomingTasks($days = 30);
 ```
 
 ### Get Overdue Maintenance Tasks
 ```php
-$tasks = PluginHospitalCmmsMaintenanceTask::getOverdueTasks();
+$tasks = PluginHospitalcmmsMaintenanceTask::getOverdueTasks();
 ```
 
 ## Branding

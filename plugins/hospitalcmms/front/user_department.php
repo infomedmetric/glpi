@@ -14,29 +14,29 @@ Session::checkLoginUser();
 if (isset($_POST["add_user"])) {
     // Add user to department
     $userId = $_POST['users_id'];
-    $departmentId = $_POST['plugin_hospital_cmms_categories_id'];
+    $departmentId = $_POST['plugin_hospitalcmms_categories_id'];
     $role = $_POST['role'];
 
-    PluginHospitalCmmsPermission::addUserToDepartment($userId, $departmentId, $role);
+    PluginHospitalcmmsPermission::addUserToDepartment($userId, $departmentId, $role);
     Session::addMessageAfterRedirect(__('User added to department successfully.'));
     Html::back();
 
 } elseif (isset($_POST["remove_user"])) {
     // Remove user from department
     $userId = $_POST['users_id'];
-    $departmentId = $_POST['plugin_hospital_cmms_categories_id'];
+    $departmentId = $_POST['plugin_hospitalcmms_categories_id'];
 
-    PluginHospitalCmmsPermission::removeUserFromDepartment($userId, $departmentId);
+    PluginHospitalcmmsPermission::removeUserFromDepartment($userId, $departmentId);
     Session::addMessageAfterRedirect(__('User removed from department successfully.'));
     Html::back();
 
 } elseif (isset($_POST["update_role"])) {
     // Update user's role in department
     $userId = $_POST['users_id'];
-    $departmentId = $_POST['plugin_hospital_cmms_categories_id'];
+    $departmentId = $_POST['plugin_hospitalcmms_categories_id'];
     $role = $_POST['role'];
 
-    PluginHospitalCmmsPermission::addUserToDepartment($userId, $departmentId, $role);
+    PluginHospitalcmmsPermission::addUserToDepartment($userId, $departmentId, $role);
     Session::addMessageAfterRedirect(__('User role updated successfully.'));
     Html::back();
 
@@ -45,7 +45,7 @@ if (isset($_POST["add_user"])) {
     $departmentId = $_GET['department_id'] ?? 0;
 
     if ($departmentId > 0) {
-        $department = new PluginHospitalCmmsCategory();
+        $department = new PluginHospitalcmmsCategory();
         $department->getFromDB($departmentId);
 
         echo "<div class='center'>\n";
@@ -61,19 +61,19 @@ if (isset($_POST["add_user"])) {
         echo "</tr>\n";
 
         // Get users in this department
-        $users = PluginHospitalCmmsPermission::getDepartmentUsers($departmentId);
+        $users = PluginHospitalcmmsPermission::getDepartmentUsers($departmentId);
         foreach ($users as $user) {
             echo "<tr>\n";
             echo "<td>" . htmlescape($user['username']) . "</td>\n";
-            echo "<td>" . PluginHospitalCmmsPermission::getRoleName($user['role']) . "</td>\n";
+            echo "<td>" . PluginHospitalcmmsPermission::getRoleName($user['role']) . "</td>\n";
             echo "<td>\n";
 
             // Update role form
             echo "<form method='post' style='display: inline;'>\n";
             echo "<input type='hidden' name='users_id' value='" . $user['id'] . "'>\n";
-            echo "<input type='hidden' name='plugin_hospital_cmms_categories_id' value='" . $departmentId . "'>\n";
+            echo "<input type='hidden' name='plugin_hospitalcmms_categories_id' value='" . $departmentId . "'>\n";
             echo "<select name='role'>\n";
-            foreach (PluginHospitalCmmsPermission::getRoles() as $key => $label) {
+            foreach (PluginHospitalcmmsPermission::getRoles() as $key => $label) {
                 echo "<option value='" . $key . "' " . ($user['role'] === $key ? 'selected' : '') . ">" . $label . "</option>\n";
             }
             echo "</select>\n";
@@ -83,7 +83,7 @@ if (isset($_POST["add_user"])) {
             // Remove form
             echo "<form method='post' style='display: inline;'>\n";
             echo "<input type='hidden' name='users_id' value='" . $user['id'] . "'>\n";
-            echo "<input type='hidden' name='plugin_hospital_cmms_categories_id' value='" . $departmentId . "'>\n";
+            echo "<input type='hidden' name='plugin_hospitalcmms_categories_id' value='" . $departmentId . "'>\n";
             echo "<input type='submit' name='remove_user' value='" . __('Remove') . "' class='btn btn-sm btn-danger' onclick=\"return confirm('" . __('Are you sure?') . "');\">\n";
             echo "</form>\n";
 
@@ -96,7 +96,7 @@ if (isset($_POST["add_user"])) {
         // Add user form
         echo "<h3>" . __('Add User to Department') . "</h3>\n";
         echo "<form method='post'>\n";
-        echo "<input type='hidden' name='plugin_hospital_cmms_categories_id' value='" . $departmentId . "'>\n";
+        echo "<input type='hidden' name='plugin_hospitalcmms_categories_id' value='" . $departmentId . "'>\n";
 
         echo "<table class='tab_cadre_fixe'>\n";
         echo "<tr>\n";
@@ -110,7 +110,7 @@ if (isset($_POST["add_user"])) {
         echo "<td class='center'>" . __('Role') . "</td>\n";
         echo "<td class='center'>\n";
         echo "<select name='role'>\n";
-        foreach (PluginHospitalCmmsPermission::getRoles() as $key => $label) {
+        foreach (PluginHospitalcmmsPermission::getRoles() as $key => $label) {
             echo "<option value='" . $key . "'>" . $label . "</option>\n";
         }
         echo "</select>\n";
@@ -131,7 +131,7 @@ if (isset($_POST["add_user"])) {
         echo "<div class='center'>\n";
         echo "<h2>" . __('Select Department to Manage') . "</h2>\n";
 
-        $departments = new PluginHospitalCmmsCategory();
+        $departments = new PluginHospitalcmmsCategory();
         $departments->dropdown([
             'name'   => 'department_id',
             'entity' => -1,

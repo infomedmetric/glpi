@@ -20,63 +20,63 @@ if (!defined('GLPI_ROOT')) {
 /**
  * Plugin initialization
  */
-function plugin_init_hospital_cmms() {
+function plugin_init_hospitalcmms() {
     global $PLUGIN_HOOKS;
 
-    $PLUGIN_HOOKS['csrf_compliant']['hospital_cmms'] = true;
+    $PLUGIN_HOOKS['csrf_compliant']['hospitalcmms'] = true;
 
     // Plugin configuration
     $plugin = new Plugin();
-    if ($plugin->isActivated('hospital_cmms')) {
+    if ($plugin->isActivated('hospitalcmms')) {
         // Initialize menu modifications
-        PluginHospitalCmmsMenu::init();
+        PluginHospitalcmmsMenu::init();
 
         // Add menu entries
-        $PLUGIN_HOOKS['menu_toadd']['hospital_cmms'] = [
-            'admin' => 'PluginHospitalCmmsConfig',
-            'assets' => 'PluginHospitalCmmsMedicalEquipment',
-            'tools'  => 'PluginHospitalCmmsMaintenanceTask',
+        $PLUGIN_HOOKS['menu_toadd']['hospitalcmms'] = [
+            'admin' => 'PluginHospitalcmmsConfig',
+            'assets' => 'PluginHospitalcmmsMedicalEquipment',
+            'tools'  => 'PluginHospitalcmmsMaintenanceTask',
         ];
 
         // Add subscription menu for admins
         if (Session::haveRight('config', UPDATE)) {
-            $PLUGIN_HOOKS['menu_toadd']['hospital_cmms']['config'] = 'PluginHospitalCmmsSubscription';
+            $PLUGIN_HOOKS['menu_toadd']['hospitalcmms']['config'] = 'PluginHospitalcmmsSubscription';
         }
 
         // Add submenu for department management
-        $PLUGIN_HOOKS['submenu_entry']['admin']['options']['hospital_cmms_departments'] = [
+        $PLUGIN_HOOKS['submenu_entry']['admin']['options']['hospitalcmms_departments'] = [
             'title'  => __('Department Management'),
-            'page'   => '/plugins/hospital_cmms/front/user_department.php',
+            'page'   => '/plugins/hospitalcmms/front/user_department.php',
             'links'  => [
-                'add'  => '/plugins/hospital_cmms/front/user_department.php',
+                'add'  => '/plugins/hospitalcmms/front/user_department.php',
             ],
         ];
 
         // Add central page
-        $PLUGIN_HOOKS['change_central_display']['hospital_cmms'] = [
-            'PluginHospitalCmmsCentral',
+        $PLUGIN_HOOKS['change_central_display']['hospitalcmms'] = [
+            'PluginHospitalcmmsCentral',
             'showCentral',
         ];
 
         // Add itemtypes to search
-        $PLUGIN_HOOKS['use_item']['hospital_cmms'] = [
-            'Computer'          => 'PluginHospitalCmmsComputer',
-            'Monitor'           => 'PluginHospitalCmmsMonitor',
-            'Printer'           => 'PluginHospitalCmmsPrinter',
-            'NetworkEquipment'  => 'PluginHospitalCmmsNetworkEquipment',
-            'Peripheral'        => 'PluginHospitalCmmsPeripheral',
-            'Phone'             => 'PluginHospitalCmmsPhone',
+        $PLUGIN_HOOKS['use_item']['hospitalcmms'] = [
+            'Computer'          => 'PluginHospitalcmmsComputer',
+            'Monitor'           => 'PluginHospitalcmmsMonitor',
+            'Printer'           => 'PluginHospitalcmmsPrinter',
+            'NetworkEquipment'  => 'PluginHospitalcmmsNetworkEquipment',
+            'Peripheral'        => 'PluginHospitalcmmsPeripheral',
+            'Phone'             => 'PluginHospitalcmmsPhone',
         ];
 
         // Register autoloader
-        $PLUGIN_HOOKS['autoloader']['hospital_cmms'] = true;
+        $PLUGIN_HOOKS['autoloader']['hospitalcmms'] = true;
     }
 }
 
 /**
  * Plugin configuration (mandatory)
  */
-function plugin_version_hospital_cmms() {
+function plugin_version_hospitalcmms() {
     return [
         'name'           => 'Hospital CMMS',
         'version'        => '1.0.0',
@@ -95,9 +95,9 @@ function plugin_version_hospital_cmms() {
 /**
  * Plugin uninstall
  */
-function plugin_hospital_cmms_uninstall() {
+function plugin_hospitalcmms_uninstall() {
     // Clean configuration
-    $query = "DELETE FROM `glpi_configs` WHERE `context` = 'plugin:hospital_cmms'";
+    $query = "DELETE FROM `glpi_configs` WHERE `context` = 'plugin:hospitalcmms'";
     $DB = DBmysql::getInstance();
     $DB->query($query);
 

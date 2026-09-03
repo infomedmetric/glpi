@@ -16,7 +16,7 @@ if (!defined('GLPI_ROOT')) {
  *
  * Manages plugin settings and menu configuration.
  */
-class PluginHospitalCmmsConfig extends CommonGLPI {
+class PluginHospitalcmmsConfig extends CommonGLPI {
 
     public static function getTypeName($nb = 0) {
         return __('Hospital CMMS');
@@ -32,7 +32,7 @@ class PluginHospitalCmmsConfig extends CommonGLPI {
             'SELECT' => ['value'],
             'FROM'   => 'glpi_configs',
             'WHERE'  => [
-                'context' => 'plugin:hospital_cmms',
+                'context' => 'plugin:hospitalcmms',
                 'name'    => $key,
             ],
         ]);
@@ -57,12 +57,12 @@ class PluginHospitalCmmsConfig extends CommonGLPI {
             $DB->update('glpi_configs', [
                 'value' => $value,
             ], [
-                'context' => 'plugin:hospital_cmms',
+                'context' => 'plugin:hospitalcmms',
                 'name'    => $key,
             ]);
         } else {
             $DB->insert('glpi_configs', [
-                'context' => 'plugin:hospital_cmms',
+                'context' => 'plugin:hospitalcmms',
                 'name'    => $key,
                 'value'   => $value,
             ]);
@@ -74,9 +74,9 @@ class PluginHospitalCmmsConfig extends CommonGLPI {
      */
     public static function getMenuItems() {
         return [
-            'plugin_hospital_cmms_equipments' => PluginHospitalCmmsMedicalEquipment::class,
-            'plugin_hospital_cmms_maintenance' => PluginHospitalCmmsMaintenanceTask::class,
-            'plugin_hospital_cmms_departments' => PluginHospitalCmmsCategory::class,
+            'plugin_hospitalcmms_equipments' => PluginHospitalcmmsMedicalEquipment::class,
+            'plugin_hospitalcmms_maintenance' => PluginHospitalcmmsMaintenanceTask::class,
+            'plugin_hospitalcmms_departments' => PluginHospitalcmmsCategory::class,
         ];
     }
 

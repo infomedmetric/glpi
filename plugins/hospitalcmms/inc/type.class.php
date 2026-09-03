@@ -16,7 +16,7 @@ if (!defined('GLPI_ROOT')) {
  *
  * Manages types of medical equipment (e.g., Imaging, Surgical, Diagnostic).
  */
-class PluginHospitalCmmsType extends CommonDropdown {
+class PluginHospitalcmmsType extends CommonDropdown {
 
     // From CommonDBTM
     public $dohistory = true;

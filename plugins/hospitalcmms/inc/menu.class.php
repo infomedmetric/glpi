@@ -16,7 +16,7 @@ if (!defined('GLPI_ROOT')) {
  *
  * Handles menu customization to hide IT-specific items and show medical equipment.
  */
-class PluginHospitalCmmsMenu extends CommonGLPI {
+class PluginHospitalcmmsMenu extends CommonGLPI {
 
     /**
      * Initialize menu modifications
@@ -25,14 +25,14 @@ class PluginHospitalCmmsMenu extends CommonGLPI {
         global $CFG_GLPI, $PLUGIN_HOOKS;
 
         // Register menu hooks
-        $PLUGIN_HOOKS['menu_toadd']['hospital_cmms'] = [
-            'assets' => 'PluginHospitalCmmsMedicalEquipment',
-            'tools'  => 'PluginHospitalCmmsMaintenanceTask',
-            'admin'  => 'PluginHospitalCmmsConfig',
+        $PLUGIN_HOOKS['menu_toadd']['hospitalcmms'] = [
+            'assets' => 'PluginHospitalcmmsMedicalEquipment',
+            'tools'  => 'PluginHospitalcmmsMaintenanceTask',
+            'admin'  => 'PluginHospitalcmmsConfig',
         ];
 
         // Hide IT-specific menus if configured
-        if (PluginHospitalCmmsConfig::shouldHideITMenus()) {
+        if (PluginHospitalcmmsConfig::shouldHideITMenus()) {
             self::hideITMenus();
         }
     }
@@ -78,73 +78,73 @@ class PluginHospitalCmmsMenu extends CommonGLPI {
         if (!isset($CFG_GLPI['asset_types'])) {
             $CFG_GLPI['asset_types'] = [];
         }
-        $CFG_GLPI['asset_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['asset_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to document types
         if (!isset($CFG_GLPI['document_types'])) {
             $CFG_GLPI['document_types'] = [];
         }
-        $CFG_GLPI['document_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['document_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to ticket types
         if (!isset($CFG_GLPI['ticket_types'])) {
             $CFG_GLPI['ticket_types'] = [];
         }
-        $CFG_GLPI['ticket_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['ticket_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to contract types
         if (!isset($CFG_GLPI['contract_types'])) {
             $CFG_GLPI['contract_types'] = [];
         }
-        $CFG_GLPI['contract_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['contract_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to infocom types
         if (!isset($CFG_GLPI['infocom_types'])) {
             $CFG_GLPI['infocom_types'] = [];
         }
-        $CFG_GLPI['infocom_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['infocom_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to link types
         if (!isset($CFG_GLPI['link_types'])) {
             $CFG_GLPI['link_types'] = [];
         }
-        $CFG_GLPI['link_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['link_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to kb types
         if (!isset($CFG_GLPI['kb_types'])) {
             $CFG_GLPI['kb_types'] = [];
         }
-        $CFG_GLPI['kb_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['kb_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to location types
         if (!isset($CFG_GLPI['location_types'])) {
             $CFG_GLPI['location_types'] = [];
         }
-        $CFG_GLPI['location_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['location_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to state types
         if (!isset($CFG_GLPI['state_types'])) {
             $CFG_GLPI['state_types'] = [];
         }
-        $CFG_GLPI['state_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['state_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to report types
         if (!isset($CFG_GLPI['report_types'])) {
             $CFG_GLPI['report_types'] = [];
         }
-        $CFG_GLPI['report_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['report_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to globalsearch types
         if (!isset($CFG_GLPI['globalsearch_types'])) {
             $CFG_GLPI['globalsearch_types'] = [];
         }
-        $CFG_GLPI['globalsearch_types'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['globalsearch_types'][] = PluginHospitalcmmsMedicalEquipment::class;
 
         // Add medical equipment to lock_lockable_objects
         if (!isset($CFG_GLPI['lock_lockable_objects'])) {
             $CFG_GLPI['lock_lockable_objects'] = [];
         }
-        $CFG_GLPI['lock_lockable_objects'][] = PluginHospitalCmmsMedicalEquipment::class;
+        $CFG_GLPI['lock_lockable_objects'][] = PluginHospitalcmmsMedicalEquipment::class;
     }
 
     /**

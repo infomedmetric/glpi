@@ -17,13 +17,13 @@ if (!defined('GLPI_ROOT')) {
  * Represents medical equipment in the hospital CMMS system.
  * Each piece of equipment is associated with a department, type, and model.
  */
-class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
+class PluginHospitalcmmsMedicalEquipment extends CommonDBTM {
 
     // From CommonDBTM
     public $dohistory = true;
 
     // DDB fields
-    public static $rightname = 'plugin_hospital_cmms_equipments';
+    public static $rightname = 'plugin_hospitalcmms_equipments';
 
     public function getCloneRelations(): array {
         return [
@@ -92,8 +92,8 @@ class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
     private function addToHistory($action, $comment = '') {
         global $DB;
 
-        $DB->insert('glpi_plugin_hospital_cmms_maintenance_history', [
-            'plugin_hospital_cmms_equipments_id' => $this->fields['id'],
+        $DB->insert('glpi_plugin_hospitalcmms_maintenance_history', [
+            'plugin_hospitalcmms_equipments_id' => $this->fields['id'],
             'action'                             => $action,
             'comment'                            => $comment,
             'users_id'                           => Session::getLoginUserID(),
@@ -128,7 +128,7 @@ class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
 
         // Add department filtering based on user permissions
         $userId = Session::getLoginUserID();
-        $permissionFilter = PluginHospitalCmmsPermission::getEquipmentVisibilityFilter($userId);
+        $permissionFilter = PluginHospitalcmmsPermission::getEquipmentVisibilityFilter($userId);
 
         if (!empty($permissionFilter)) {
             $criteria = array_merge($criteria, $permissionFilter);
@@ -164,7 +164,7 @@ class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
 
         $tab[] = [
             'id'            => '4',
-            'table'         => 'glpi_plugin_hospital_cmms_categories',
+            'table'         => 'glpi_plugin_hospitalcmms_categories',
             'field'         => 'completename',
             'name'          => __('Department'),
             'datatype'      => 'dropdown',
@@ -173,7 +173,7 @@ class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
 
         $tab[] = [
             'id'            => '5',
-            'table'         => 'glpi_plugin_hospital_cmms_types',
+            'table'         => 'glpi_plugin_hospitalcmms_types',
             'field'         => 'name',
             'name'          => __('Equipment Type'),
             'datatype'      => 'dropdown',
@@ -181,7 +181,7 @@ class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
 
         $tab[] = [
             'id'            => '6',
-            'table'         => 'glpi_plugin_hospital_cmms_models',
+            'table'         => 'glpi_plugin_hospitalcmms_models',
             'field'         => 'name',
             'name'          => __('Equipment Model'),
             'datatype'      => 'dropdown',
@@ -347,10 +347,10 @@ class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
         global $DB;
 
         $iterator = $DB->request([
-            'SELECT' => ['id', 'name', 'serial', 'plugin_hospital_cmms_types_id'],
+            'SELECT' => ['id', 'name', 'serial', 'plugin_hospitalcmms_types_id'],
             'FROM'   => self::getTable(),
             'WHERE'  => [
-                'plugin_hospital_cmms_categories_id' => $departmentId,
+                'plugin_hospitalcmms_categories_id' => $departmentId,
                 'is_deleted'                         => 0,
             ],
             'ORDER'  => 'name ASC',
@@ -369,7 +369,7 @@ class PluginHospitalCmmsMedicalEquipment extends CommonDBTM {
             'SELECT' => [
                 'id', 'name', 'serial',
                 'next_calibration_date',
-                'plugin_hospital_cmms_categories_id',
+                'plugin_hospitalcmms_categories_id',
             ],
             'FROM'   => self::getTable(),
             'WHERE'  => [

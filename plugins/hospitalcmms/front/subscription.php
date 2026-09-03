@@ -16,7 +16,7 @@ if (!Session::haveRight('config', UPDATE)) {
     Html::displayRightError();
 }
 
-$subscription = new PluginHospitalCmmsSubscription();
+$subscription = new PluginHospitalcmmsSubscription();
 
 // Handle subscription updates
 if (isset($_POST["update_subscription"])) {
@@ -28,8 +28,8 @@ if (isset($_POST["update_subscription"])) {
 
 if (isset($_POST["cancel_subscription"])) {
     $subscription->check($_POST['id'], UPDATE);
-    $DB->update(PluginHospitalCmmsSubscription::getTable(), [
-        'status' => PluginHospitalCmmsSubscription::STATUS_CANCELLED,
+    $DB->update(PluginHospitalcmmsSubscription::getTable(), [
+        'status' => PluginHospitalcmmsSubscription::STATUS_CANCELLED,
         'is_active' => 0,
     ], [
         'id' => $_POST['id'],
@@ -40,8 +40,8 @@ if (isset($_POST["cancel_subscription"])) {
 
 if (isset($_POST["activate_subscription"])) {
     $subscription->check($_POST['id'], UPDATE);
-    $DB->update(PluginHospitalCmmsSubscription::getTable(), [
-        'status' => PluginHospitalCmmsSubscription::STATUS_ACTIVE,
+    $DB->update(PluginHospitalcmmsSubscription::getTable(), [
+        'status' => PluginHospitalcmmsSubscription::STATUS_ACTIVE,
         'is_active' => 1,
         'subscription_start' => date('Y-m-d H:i:s'),
         'subscription_end' => date('Y-m-d H:i:s', strtotime('+1 year')),
@@ -57,7 +57,7 @@ echo "<div class='center'>\n";
 echo "<h2>" . __('Subscription Management') . "</h2>\n";
 
 // Display subscription statistics
-$stats = PluginHospitalCmmsSubscription::getStats();
+$stats = PluginHospitalcmmsSubscription::getStats();
 echo "<div style='display: flex; justify-content: center; gap: 20px; margin: 20px 0;'>\n";
 echo "<div style='background: #f0f9ff; padding: 20px; border-radius: 10px; min-width: 150px;'>\n";
 echo "<h3 style='margin: 0; color: #0369a1;'>" . __('Total Hospitals') . "</h3>\n";
@@ -84,7 +84,7 @@ echo "</div>\n";
 echo "<div style='margin: 20px auto; max-width: 1200px;'>\n";
 echo "<h3>" . __('All Subscriptions') . "</h3>\n";
 
-Search::show(PluginHospitalCmmsSubscription::class);
+Search::show(PluginHospitalcmmsSubscription::class);
 
 echo "</div>\n";
 
@@ -92,7 +92,7 @@ echo "</div>\n";
 echo "<div style='margin: 40px auto; max-width: 1000px;'>\n";
 echo "<h3>" . __('Subscription Plans') . "</h3>\n";
 
-foreach (PluginHospitalCmmsSubscription::PLANS as $planId => $plan) {
+foreach (PluginHospitalcmmsSubscription::PLANS as $planId => $plan) {
     echo "<div style='background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; margin: 16px 0;'>\n";
     echo "<div style='display: flex; justify-content: space-between; align-items: center;'>\n";
     echo "<div>\n";

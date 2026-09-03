@@ -16,7 +16,7 @@ if (!defined('GLPI_ROOT')) {
  *
  * Displays the main dashboard for hospital equipment management.
  */
-class PluginHospitalCmmsCentral extends CommonGLPI {
+class PluginHospitalcmmsCentral extends CommonGLPI {
 
     public static function getTypeName($nb = 0) {
         return __('Hospital CMMS Dashboard');
@@ -54,13 +54,13 @@ class PluginHospitalCmmsCentral extends CommonGLPI {
 
         $total = $DB->result($DB->request([
             'SELECT' => ['COUNT(*) AS total'],
-            'FROM'   => 'glpi_plugin_hospital_cmms_equipments',
+            'FROM'   => 'glpi_plugin_hospitalcmms_equipments',
             'WHERE'  => ['is_deleted' => 0],
         ]), 0, 'total');
 
         $active = $DB->result($DB->request([
             'SELECT' => ['COUNT(*) AS total'],
-            'FROM'   => 'glpi_plugin_hospital_cmms_equipments',
+            'FROM'   => 'glpi_plugin_hospitalcmms_equipments',
             'WHERE'  => [
                 'is_deleted' => 0,
                 'states_id'  => ['!=', 0],
@@ -69,7 +69,7 @@ class PluginHospitalCmmsCentral extends CommonGLPI {
 
         $needingMaintenance = $DB->result($DB->request([
             'SELECT' => ['COUNT(*) AS total'],
-            'FROM'   => 'glpi_plugin_hospital_cmms_maintenance_tasks',
+            'FROM'   => 'glpi_plugin_hospitalcmms_maintenance_tasks',
             'WHERE'  => [
                 'is_active' => 1,
                 'next_execution_date' => ['<=', date('Y-m-d')],
@@ -98,7 +98,7 @@ class PluginHospitalCmmsCentral extends CommonGLPI {
      * Show upcoming maintenance tasks
      */
     private static function showUpcomingMaintenance() {
-        $tasks = PluginHospitalCmmsMaintenanceTask::getUpcomingTasks(30);
+        $tasks = PluginHospitalcmmsMaintenanceTask::getUpcomingTasks(30);
 
         echo "<div style='margin: 20px; padding: 20px; background: white; border-radius: 8px; border: 1px solid #e5e7eb;'>";
         echo "<h3 style='margin-top: 0; color: #374151;'>" . __('Upcoming Maintenance (Next 30 Days)') . "</h3>";
@@ -147,12 +147,12 @@ class PluginHospitalCmmsCentral extends CommonGLPI {
                 'c.name',
                 'COUNT(e.id) AS equipment_count',
             ],
-            'FROM'       => 'glpi_plugin_hospital_cmms_categories AS c',
+            'FROM'       => 'glpi_plugin_hospitalcmms_categories AS c',
             'LEFT JOIN'  => [
-                'glpi_plugin_hospital_cmms_equipments AS e' => [
+                'glpi_plugin_hospitalcmms_equipments AS e' => [
                     'FKEY' => [
                         'c'  => 'id',
-                        'e'  => 'plugin_hospital_cmms_categories_id'
+                        'e'  => 'plugin_hospitalcmms_categories_id'
                     ]
                 ]
             ],
@@ -192,7 +192,7 @@ class PluginHospitalCmmsCentral extends CommonGLPI {
      * Show equipment needing calibration
      */
     private static function showCalibrationDue() {
-        $equipment = PluginHospitalCmmsMedicalEquipment::getEquipmentNeedingCalibration(90);
+        $equipment = PluginHospitalcmmsMedicalEquipment::getEquipmentNeedingCalibration(90);
 
         echo "<div style='margin: 20px; padding: 20px; background: white; border-radius: 8px; border: 1px solid #e5e7eb;'>";
         echo "<h3 style='margin-top: 0; color: #374151;'>" . __('Calibration Due (Next 90 Days)') . "</h3>";
@@ -217,7 +217,7 @@ class PluginHospitalCmmsCentral extends CommonGLPI {
                 echo "<tr>";
                 echo "<td>" . htmlescape($item['name']) . "</td>";
                 echo "<td>" . htmlescape($item['serial']) . "</td>";
-                echo "<td>" . htmlescape($item['plugin_hospital_cmms_categories_id']) . "</td>";
+                echo "<td>" . htmlescape($item['plugin_hospitalcmms_categories_id']) . "</td>";
                 echo "<td {$dateClass}>" . htmlescape($item['next_calibration_date']) . "</td>";
                 echo "</tr>";
             }

@@ -11,7 +11,7 @@ include("../../../inc/includes.php");
 
 Session::checkLoginUser();
 
-$task = new PluginHospitalCmmsMaintenanceTask();
+$task = new PluginHospitalcmmsMaintenanceTask();
 
 if (isset($_POST["add"])) {
     $task->check(-1, CREATE, $_POST);

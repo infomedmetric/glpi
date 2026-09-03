@@ -17,12 +17,12 @@ if (!defined('GLPI_ROOT')) {
  * Manages preventive maintenance schedules for medical equipment.
  * Tracks frequency, execution history, and upcoming maintenance.
  */
-class PluginHospitalCmmsMaintenanceTask extends CommonDBTM {
+class PluginHospitalcmmsMaintenanceTask extends CommonDBTM {
 
     // From CommonDBTM
     public $dohistory = true;
 
-    public static $rightname = 'plugin_hospital_cmms_maintenance_tasks';
+    public static $rightname = 'plugin_hospitalcmms_maintenance_tasks';
 
     public static function getTypeName($nb = 0) {
         return _n('Maintenance Task', 'Maintenance Tasks', $nb);
@@ -63,11 +63,11 @@ class PluginHospitalCmmsMaintenanceTask extends CommonDBTM {
                 'me.name AS equipment_name',
                 'me.serial AS equipment_serial',
             ],
-            'FROM'       => 'glpi_plugin_hospital_cmms_maintenance_tasks AS mt',
+            'FROM'       => 'glpi_plugin_hospitalcmms_maintenance_tasks AS mt',
             'LEFT JOIN'  => [
-                'glpi_plugin_hospital_cmms_equipments AS me' => [
+                'glpi_plugin_hospitalcmms_equipments AS me' => [
                     'FKEY' => [
-                        'mt'  => 'plugin_hospital_cmms_equipments_id',
+                        'mt'  => 'plugin_hospitalcmms_equipments_id',
                         'me'  => 'id'
                     ]
                 ]
@@ -99,11 +99,11 @@ class PluginHospitalCmmsMaintenanceTask extends CommonDBTM {
                 'mt.type',
                 'me.name AS equipment_name',
             ],
-            'FROM'       => 'glpi_plugin_hospital_cmms_maintenance_tasks AS mt',
+            'FROM'       => 'glpi_plugin_hospitalcmms_maintenance_tasks AS mt',
             'LEFT JOIN'  => [
-                'glpi_plugin_hospital_cmms_equipments AS me' => [
+                'glpi_plugin_hospitalcmms_equipments AS me' => [
                     'FKEY' => [
-                        'mt'  => 'plugin_hospital_cmms_equipments_id',
+                        'mt'  => 'plugin_hospitalcmms_equipments_id',
                         'me'  => 'id'
                     ]
                 ]
@@ -130,9 +130,9 @@ class PluginHospitalCmmsMaintenanceTask extends CommonDBTM {
 
         if ($task->getID() > 0) {
             // Record in history
-            $DB->insert('glpi_plugin_hospital_cmms_maintenance_history', [
-                'plugin_hospital_cmms_equipments_id'    => $task->fields['plugin_hospital_cmms_equipments_id'],
-                'plugin_hospital_cmms_maintenance_tasks_id' => $taskId,
+            $DB->insert('glpi_plugin_hospitalcmms_maintenance_history', [
+                'plugin_hospitalcmms_equipments_id'    => $task->fields['plugin_hospitalcmms_equipments_id'],
+                'plugin_hospitalcmms_maintenance_tasks_id' => $taskId,
                 'action'                                => 'completed',
                 'comment'                               => $comment,
                 'users_id'                              => Session::getLoginUserID(),
@@ -205,7 +205,7 @@ class PluginHospitalCmmsMaintenanceTask extends CommonDBTM {
 
         $tab[] = [
             'id'            => '4',
-            'table'         => 'glpi_plugin_hospital_cmms_equipments',
+            'table'         => 'glpi_plugin_hospitalcmms_equipments',
             'field'         => 'name',
             'name'          => __('Equipment'),
             'datatype'      => 'dropdown',

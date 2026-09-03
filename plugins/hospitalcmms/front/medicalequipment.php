@@ -11,7 +11,7 @@ include("../../../inc/includes.php");
 
 Session::checkLoginUser();
 
-$equipment = new PluginHospitalCmmsMedicalEquipment();
+$equipment = new PluginHospitalcmmsMedicalEquipment();
 
 if (isset($_POST["add"])) {
     $equipment->check(-1, CREATE, $_POST);

@@ -16,7 +16,7 @@ if (!defined('GLPI_ROOT')) {
  *
  * Manages models of medical equipment (e.g., GE Vivid E9, Philips IntelliVue MX800).
  */
-class PluginHospitalCmmsModel extends CommonDropdown {
+class PluginHospitalcmmsModel extends CommonDropdown {
 
     // From CommonDBTM
     public $dohistory = true;

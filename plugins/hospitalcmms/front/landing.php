@@ -46,7 +46,7 @@ if (isset($_POST["register_trial"])) {
 
     // Check if email already exists
     if (empty($errors)) {
-        $existing = PluginHospitalCmmsSubscription::checkEmailExists($email);
+        $existing = PluginHospitalcmmsSubscription::checkEmailExists($email);
         if ($existing) {
             $errors[] = __('An account with this email already exists');
         }
@@ -54,7 +54,7 @@ if (isset($_POST["register_trial"])) {
 
     if (empty($errors)) {
         // Create subscription
-        $result = PluginHospitalCmmsSubscription::createTrialSubscription([
+        $result = PluginHospitalcmmsSubscription::createTrialSubscription([
             'hospital_name' => $hospital_name,
             'contact_name'  => $contact_name,
             'email'         => $email,
@@ -65,14 +65,14 @@ if (isset($_POST["register_trial"])) {
 
         if ($result['success']) {
             // Send confirmation email
-            PluginHospitalCmmsSubscription::sendConfirmationEmail($email, $hospital_name, $result['login']);
+            PluginHospitalcmmsSubscription::sendConfirmationEmail($email, $hospital_name, $result['login']);
 
             Session::addMessageAfterRedirect(
                 __('Registration successful! Check your email for login credentials.'),
                 false,
                 INFO
             );
-            Html::redirect($CFG_GLPI['root_doc'] . "/plugins/hospital_cmms/front/landing.php?registered=1");
+            Html::redirect($CFG_GLPI['root_doc'] . "/plugins/hospitalcmms/front/landing.php?registered=1");
             exit();
         } else {
             $errors[] = $result['message'] ?? __('Registration failed. Please try again.');
@@ -81,7 +81,7 @@ if (isset($_POST["register_trial"])) {
 }
 
 // Get subscription stats for display
-$stats = PluginHospitalCmmsSubscription::getStats();
+$stats = PluginHospitalcmmsSubscription::getStats();
 ?>
 <!DOCTYPE html>
 <html lang="en">

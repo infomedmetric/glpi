@@ -12,4 +12,4 @@ include("../../../inc/includes.php");
 Session::checkLoginUser();
 
 // Search for medical equipment
-Search::show('PluginHospitalCmmsMedicalEquipment');
+Search::show('PluginHospitalcmmsMedicalEquipment');
