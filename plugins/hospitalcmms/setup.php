@@ -58,16 +58,6 @@ function plugin_init_hospitalcmms() {
             'showCentral',
         ];
 
-        // Add itemtypes to search
-        $PLUGIN_HOOKS['use_item']['hospitalcmms'] = [
-            'Computer'          => 'PluginHospitalcmmsComputer',
-            'Monitor'           => 'PluginHospitalcmmsMonitor',
-            'Printer'           => 'PluginHospitalcmmsPrinter',
-            'NetworkEquipment'  => 'PluginHospitalcmmsNetworkEquipment',
-            'Peripheral'        => 'PluginHospitalcmmsPeripheral',
-            'Phone'             => 'PluginHospitalcmmsPhone',
-        ];
-
         // Register autoloader
         $PLUGIN_HOOKS['autoloader']['hospitalcmms'] = true;
     }
