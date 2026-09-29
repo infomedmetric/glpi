@@ -3,12 +3,21 @@
 All notable changes to MedMetric CMMS are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [1.0.1] - 2026-09-29
+## [1.0.2] - 2026-09-29
 
 ### Fixed
 - Fatal `Class "Analytics" not found` when rendering the central dashboard:
   the `DISPLAY_CENTRAL` widget called the unqualified `Analytics` from the
   global namespace, where no such class exists. It is now fully qualified.
+
+### Notes
+- Upgrading from 1.0.1 runs `sql/upgrade/1.0.1_to_1.0.2.sql`, which adds the
+  `sla_hours` / `sla_breached` columns to work orders. Both are additive with
+  defaults and unused by the current UI. Fresh installs are unaffected.
+
+## [1.0.1] - 2026-09-29
+
+### Fixed
 - "Plugin MedMetric CMMS has no install function!" on install: plugin classes
   are now loaded from `plugin_init_medmetriccmms()` (GLPI's plugin autoloader
   only maps `src/`, not the classic `inc/` layout) and defensively at the top
