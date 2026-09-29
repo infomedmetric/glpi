@@ -31,15 +31,37 @@ class Profile
     public const RIGHTNAME = 'plugin_medmetriccmms';
 
     /**
-     * Install default rights: super-admin gets all, technician read+update.
+     * Install default rights: create one `plugin_medmetriccmms` row for every
+     * profile that does not have one yet (all rights disabled).
+     *
+     * Idempotent: safe to run again on upgrade, and never resets rights that
+     * an administrator already granted through a profile form.
      *
      * @return void
      */
     public static function installRights(): void {
-        $rights = [
-            'plugin_medmetriccmms' => ALLSTANDARDRIGHT,
-        ];
-        ProfileRight::addProfileRights($rights);
+        global $DB;
+
+        // Profiles that already have a plugin_medmetriccmms right row.
+        $existing = [];
+        foreach ($DB->request([
+            'SELECT' => ['profiles_id'],
+            'FROM'   => ProfileRight::getTable(),
+            'WHERE'  => ['name' => self::RIGHTNAME],
+        ]) as $row) {
+            $existing[(int) $row['profiles_id']] = true;
+        }
+
+        // `updateProfileRights()` takes a name => rights map and creates the
+        // missing row, which is the right call here. Note that
+        // `addProfileRights()` expects a plain *list* of right names and would
+        // insert the `ALLSTANDARDRIGHT` integer as the right name.
+        foreach ($DB->request(['SELECT' => ['id'], 'FROM' => GlpiProfile::getTable()]) as $row) {
+            $profiles_id = (int) $row['id'];
+            if (!isset($existing[$profiles_id])) {
+                ProfileRight::updateProfileRights($profiles_id, [self::RIGHTNAME => 0]);
+            }
+        }
     }
 
     /**
@@ -52,23 +74,41 @@ class Profile
     }
 
     /**
-     * Give full rights to the super-admin profile if it exists.
+     * Give full rights to the super-admin profile(s).
+     *
+     * Prefers the profile literally named "Super-Admin" (the GLPI default);
+     * falls back to every profile that already has full `config` rights, so
+     * administrators keep access on non-standard installations.
      *
      * @return void
      */
     public static function grantSuperAdmin(): void {
         global $DB;
-        $iterator = $DB->request([
-            'FROM'  => 'glpi_profiles',
-            'WHERE' => ['interface' => 'central'],
-            'LIMIT' => 1,
-        ]);
-        if (!count($iterator)) {
-            return;
+
+        $profiles_ids = [];
+        foreach ($DB->request([
+            'SELECT' => ['id'],
+            'FROM'   => GlpiProfile::getTable(),
+            'WHERE'  => ['name' => 'Super-Admin'],
+        ]) as $row) {
+            $profiles_ids[] = (int) $row['id'];
         }
-        ProfileRight::updateProfileRights((int) $iterator->current()['id'], [
-            self::RIGHTNAME => ALLSTANDARDRIGHT,
-        ]);
+
+        if ($profiles_ids === []) {
+            foreach ($DB->request([
+                'SELECT' => ['profiles_id'],
+                'FROM'   => ProfileRight::getTable(),
+                'WHERE'  => ['name' => 'config', 'rights' => ALLSTANDARDRIGHT],
+            ]) as $row) {
+                $profiles_ids[] = (int) $row['profiles_id'];
+            }
+        }
+
+        foreach (array_unique($profiles_ids) as $profiles_id) {
+            ProfileRight::updateProfileRights($profiles_id, [
+                self::RIGHTNAME => ALLSTANDARDRIGHT,
+            ]);
+        }
     }
 
     /**
