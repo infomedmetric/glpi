@@ -4,5 +4,5 @@
 -- ---------------------------------------------------------------------
 
 ALTER TABLE `glpi_plugin_medmetriccmms_equipments`
-  ADD COLUMN `qa_required` tinyint NOT NULL DEFAULT 0 AFTER `operating_hours`,
-  ADD COLUMN `risk_class` varchar(16) DEFAULT NULL AFTER `qa_required`;
+  ADD COLUMN IF NOT EXISTS `qa_required` tinyint NOT NULL DEFAULT 0 AFTER `operating_hours`,
+  ADD COLUMN IF NOT EXISTS `risk_class` varchar(16) DEFAULT NULL AFTER `qa_required`;

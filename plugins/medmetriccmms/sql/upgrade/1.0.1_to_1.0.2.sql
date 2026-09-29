@@ -4,5 +4,5 @@
 -- ---------------------------------------------------------------------
 
 ALTER TABLE `glpi_plugin_medmetriccmms_workorders`
-  ADD COLUMN `sla_hours` int NOT NULL DEFAULT 0 AFTER `due_date`,
-  ADD COLUMN `sla_breached` tinyint NOT NULL DEFAULT 0 AFTER `sla_hours`;
+  ADD COLUMN IF NOT EXISTS `sla_hours` int NOT NULL DEFAULT 0 AFTER `due_date`,
+  ADD COLUMN IF NOT EXISTS `sla_breached` tinyint NOT NULL DEFAULT 0 AFTER `sla_hours`;

@@ -4,4 +4,4 @@
 -- ---------------------------------------------------------------------
 
 ALTER TABLE `glpi_plugin_medmetriccmms_maintenanceplans`
-  ADD COLUMN `calibration_reminder_days` int NOT NULL DEFAULT 14 AFTER `maintenancekind`;
+  ADD COLUMN IF NOT EXISTS `calibration_reminder_days` int NOT NULL DEFAULT 14 AFTER `maintenancekind`;
