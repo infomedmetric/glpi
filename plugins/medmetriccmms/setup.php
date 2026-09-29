@@ -20,7 +20,7 @@ if (!defined('GLPI_ROOT')) {
     die("Sorry. You can't access this file directly");
 }
 
-define('PLUGIN_MEDMETRICCMMS_VERSION', '1.0.0');
+define('PLUGIN_MEDMETRICCMMS_VERSION', '1.0.1');
 define('PLUGIN_MEDMETRICCMMS_MIN_GLPI', '11.0.0');
 define('PLUGIN_MEDMETRICCMMS_MIN_PHP', '8.2');
 
@@ -32,9 +32,25 @@ define('PLUGIN_MEDMETRICCMMS_MIN_PHP', '8.2');
 function plugin_init_medmetriccmms() {
     global $PLUGIN_HOOKS;
 
+    // Load plugin classes. This plugin uses the classic inc/ layout, and
+    // GLPI's plugin autoloader only maps src/, so the classes must be
+    // required here on every load. Setup.php lives in the plugin root,
+    // so __DIR__ is always the plugin directory.
+    $inc_dir = __DIR__ . '/inc';
+    foreach (['toolbox', 'config', 'log', 'aimodel', 'ai', 'department', 'structure',
+                 'equipment', 'equipmenttype', 'equipmentmodel', 'maintenance',
+                 'maintenanceplan', 'workorder', 'notification', 'solution',
+                 'inventory', 'vendor', 'contract', 'analytics', 'report',
+                 'menu', 'profile'] as $class_file) {
+        $path = "$inc_dir/$class_file.class.php";
+        if (file_exists($path)) {
+            require_once($path);
+        }
+    }
+
     Plugin::registerClass(GlpiPlugin\Medmetriccmms\Equipment::class, ['addtabon' => 'Location']);
     Plugin::registerClass(GlpiPlugin\Medmetriccmms\WorkOrder::class, ['ticket_types' => true]);
-    Plugin::registerClass(GlpiPlugin\Medmetriccmms\Inventory::class, ['infocom' => true]);
+    Plugin::registerClass(GlpiPlugin\Medmetriccmms\Inventory::class, ['infocom_types' => true]);
     Plugin::registerClass(GlpiPlugin\Medmetriccmms\Contract::class, ['contract_types' => true]);
 
     $PLUGIN_HOOKS[Glpi\Plugin\Hooks::CSRF_COMPLIANT]['medmetriccmms'] = true;
@@ -70,15 +86,10 @@ function plugin_init_medmetriccmms() {
 
     $PLUGIN_HOOKS[Glpi\Plugin\Hooks::DISPLAY_CENTRAL]['medmetriccmms'] = 'dashboard_widget';
 
-    if (class_exists('CronTask')) {
-        CronTask::register(GlpiPlugin\Medmetriccmms\MaintenancePlan::class, 'Plan', DAY_TIMESTAMP);
-        CronTask::register(GlpiPlugin\Medmetriccmms\Notification::class, 'Alert', HOUR_TIMESTAMP);
-    }
-
-    $PLUGIN_HOOKS[Glpi\Plugin\Hooks::CRON]['medmetriccmms'] = [
-        GlpiPlugin\Medmetriccmms\MaintenancePlan::class,
-        GlpiPlugin\Medmetriccmms\Notification::class,
-    ];
+    // Cron tasks are registered in plugin_medmetriccmms_install() (hook.php) and
+    // are dispatched from the glpi_crontasks table via Itemtype::cronInfo()/cronName()
+    // calls (GLPI 11 has no CRON plugin hook). plugin_init stays side-effect-free
+    // so a transient DB issue can never prevent hook.php from loading.
 
     $PLUGIN_HOOKS[Glpi\Plugin\Hooks::AUTO_ADD_DEFAULT_WHERE]['medmetriccmms'] =
         'plugin_medmetriccmms_addDefaultWhere';
@@ -114,20 +125,12 @@ function plugin_version_medmetriccmms() {
  * @return bool
  */
 function plugin_medmetriccmms_check_prerequisites() {
-    if (!is_dir(GLPI_ROOT . '/vendor')) {
-        echo 'GLPI vendor directory missing, please run composer install.';
+    if (version_compare(PHP_VERSION, PLUGIN_MEDMETRICCMMS_MIN_PHP, '<')) {
+        echo 'MedMetric CMMS requires PHP >= ' . PLUGIN_MEDMETRICCMMS_MIN_PHP;
         return false;
     }
-    $inc_dir = Plugin::getPhpDir('medmetriccmms') . '/inc';
-    foreach (['toolbox', 'config', 'log', 'aimodel', 'ai', 'department', 'structure',
-                 'equipment', 'maintenance', 'maintenanceplan', 'workorder', 'notification',
-                 'solution', 'inventory', 'vendor', 'contract', 'analytics', 'report',
-                 'menu', 'profile'] as $class_file) {
-        $path = "$inc_dir/$class_file.class.php";
-        if (file_exists($path)) {
-            require_once($path);
-        }
-    }
+    // Classes are loaded lazily by GLPI's plugin autoloader when needed;
+    // nothing can be required here that would block installation.
     return true;
 }
 

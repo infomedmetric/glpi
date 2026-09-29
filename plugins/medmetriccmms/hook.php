@@ -17,6 +17,21 @@ if (!defined('GLPI_ROOT')) {
     die("Sorry. You can't access this file directly");
 }
 
+// Defensive class loading for lifecycle functions: even if plugin_init was
+// skipped in a previous failed request, install/uninstall/upgrade must work.
+$medmetric_inc_dir = __DIR__ . '/inc';
+foreach (['toolbox', 'config', 'log', 'aimodel', 'ai', 'department', 'structure',
+             'equipment', 'equipmenttype', 'equipmentmodel', 'maintenance',
+             'maintenanceplan', 'workorder', 'notification', 'solution',
+             'inventory', 'vendor', 'contract', 'analytics', 'report',
+             'menu', 'profile'] as $medmetric_class) {
+    $medmetric_path = "$medmetric_inc_dir/$medmetric_class.class.php";
+    if (file_exists($medmetric_path)) {
+        require_once($medmetric_path);
+    }
+}
+unset($medmetric_inc_dir, $medmetric_class, $medmetric_path);
+
 /**
  * Plugin installation: schema, seed data, rights, cron.
  *
@@ -45,23 +60,29 @@ function plugin_medmetriccmms_install() {
         'plugin:medmetriccmms'
     );
 
-    $profiles_id = $_SESSION['glpiactiveprofile']['id'] ?? null;
-    $rights = ['plugin_medmetriccmms' => ALLSTANDARDRIGHT];
-    if ($profiles_id !== null && $profiles_id > 0) {
-        ProfileRight::updateProfileRights($profiles_id, $rights);
+    // Create the `plugin_medmetriccmms` right row for every profile (idempotent),
+    // then give full rights to the administrators. Never call
+    // ProfileRight::addProfileRights() with a name => rights map: it iterates
+    // the values and would insert the ALLSTANDARDRIGHT integer as a right name.
+    $profile_class = GlpiPlugin\Medmetriccmms\Profile::class;
+    $profile_class::installRights();
+    $profile_class::grantSuperAdmin();
+    $profiles_id = (int) ($_SESSION['glpiactiveprofile']['id'] ?? 0);
+    if ($profiles_id > 0) {
+        ProfileRight::updateProfileRights($profiles_id, [$profile_class::RIGHTNAME => ALLSTANDARDRIGHT]);
     }
-    ProfileRight::addProfileRights($rights);
-    Migration::updateDisplayPrefs([
+
+    $migration->updateDisplayPrefs([
         GlpiPlugin\Medmetriccmms\Equipment::class => [2, 3, 4, 7, 8],
         GlpiPlugin\Medmetriccmms\WorkOrder::class => [2, 3, 4, 7, 8],
     ]);
 
     $cron_names = [
-        [GlpiPlugin\Medmetriccmms\MaintenancePlan::class, 'Plan'],
-        [GlpiPlugin\Medmetriccmms\Notification::class, 'Alert'],
+        [GlpiPlugin\Medmetriccmms\MaintenancePlan::class, 'Plan', DAY_TIMESTAMP],
+        [GlpiPlugin\Medmetriccmms\Notification::class, 'Alert', HOUR_TIMESTAMP],
     ];
-    foreach ($cron_names as [$class, $name]) {
-        if (!CronTask::register($class, $name, DAY_TIMESTAMP)) {
+    foreach ($cron_names as [$class, $name, $frequency]) {
+        if (!CronTask::register($class, $name, $frequency)) {
             $migration->displayMessage("Failed to register cron task $class::$name");
         }
     }
@@ -98,7 +119,7 @@ function plugin_medmetriccmms_uninstall() {
     );
 
     ProfileRight::deleteProfileRights(['plugin_medmetriccmms']);
-    Migration::updateDisplayPrefs([
+    $migration->updateDisplayPrefs([
         GlpiPlugin\Medmetriccmms\Equipment::class => [],
         GlpiPlugin\Medmetriccmms\WorkOrder::class => [],
     ]);

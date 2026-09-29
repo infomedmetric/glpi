@@ -3,6 +3,29 @@
 All notable changes to MedMetric CMMS are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.1] - 2026-09-29
+
+### Fixed
+- "Plugin MedMetric CMMS has no install function!" on install: plugin classes
+  are now loaded from `plugin_init_medmetriccmms()` (GLPI's plugin autoloader
+  only maps `src/`, not the classic `inc/` layout) and defensively at the top
+  of `hook.php`, so lifecycle functions are always defined.
+- `plugin_init` no longer performs database side effects (cron registration
+  moved to the install function), so a transient DB issue can never abort
+  plugin loading and leave `hook.php` unloaded.
+- `Migration::updateDisplayPrefs()` was called statically in
+  install/uninstall; it is an instance method and raised a fatal error.
+- Unknown `infocom` attribute warning on the plugins list: Inventory is now
+  registered with the correct `infocom_types` key.
+- Prerequisites check now only verifies the PHP version; it can no longer
+  block installation.
+- Install failed with `Duplicate entry for key 'unicity'` in
+  `glpi_profilerights`: `ProfileRight::addProfileRights()` expects a plain list
+  of right names but was given a `name => rights` map, so the numeric
+  `ALLSTANDARDRIGHT` value was inserted as a right name. Rights are now
+  created idempotently (one row per profile) and full rights are granted to the
+  Super-Admin profile, so reinstalling or upgrading no longer throws.
+
 ## [1.0.0] - 2026-09-28
 
 ### Added
