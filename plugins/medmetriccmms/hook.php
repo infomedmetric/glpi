@@ -38,12 +38,13 @@ unset($medmetric_inc_dir, $medmetric_class, $medmetric_path);
  * @return bool
  */
 function plugin_medmetriccmms_install() {
+    global $DB;
+
     $migration = new Migration(PLUGIN_MEDMETRICCMMS_VERSION);
     $migration->displayMessage('Installing MedMetric CMMS');
 
-    $db = $GLOBALS['DB'] ?? ($DB ?? null);
     $sql_file = Plugin::getPhpDir('medmetriccmms') . '/sql/install.sql';
-    if (!$db->runFile($sql_file)) {
+    if (!$DB->runFile($sql_file)) {
         $migration->displayMessage('Error running MedMetric CMMS install.sql');
         return false;
     }
@@ -97,13 +98,14 @@ function plugin_medmetriccmms_install() {
  * @return bool
  */
 function plugin_medmetriccmms_uninstall() {
+    global $DB;
+
     $migration = new Migration(PLUGIN_MEDMETRICCMMS_VERSION);
     $migration->displayMessage('Uninstalling MedMetric CMMS');
 
-    $db = $GLOBALS['DB'] ?? ($DB ?? null);
     $sql_file = Plugin::getPhpDir('medmetriccmms') . '/sql/uninstall.sql';
     if (file_exists($sql_file)) {
-        $db->runFile($sql_file);
+        $DB->runFile($sql_file);
     }
 
     $migration->removeConfig(
@@ -136,6 +138,8 @@ function plugin_medmetriccmms_uninstall() {
  * @return bool
  */
 function plugin_medmetriccmms_upgrade($from_version) {
+    global $DB;
+
     $migration = new Migration(PLUGIN_MEDMETRICCMMS_VERSION);
     $migration->displayMessage("Upgrading MedMetric CMMS from $from_version");
 
@@ -145,11 +149,10 @@ function plugin_medmetriccmms_upgrade($from_version) {
         '1.0.1' => '1.0.1_to_1.0.2.sql',
         '1.0.2' => '1.0.2_to_1.0.3.sql',
     ];
-    $db = $GLOBALS['DB'] ?? ($DB ?? null);
     if (isset($target_map[(string) $from_version])) {
         $file = $upgrade_dir . '/' . $target_map[(string) $from_version];
         if (file_exists($file)) {
-            $db->runFile($file);
+            $DB->runFile($file);
         }
     }
 
@@ -191,5 +194,7 @@ function plugin_medmetriccmms_addDefaultWhere($itemtype) {
  * @return void
  */
 function plugin_medmetriccmms_dashboard_widget() {
-    Analytics::showCentralWidget();
+    // Fully qualified: hook.php lives in the global namespace, so a bare
+    // `Analytics` would resolve to a non-existent global class and fatal.
+    GlpiPlugin\Medmetriccmms\Analytics::showCentralWidget();
 }
