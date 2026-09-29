@@ -25,7 +25,7 @@ if (!defined('GLPI_VERSION')) {
     define('GLPI_VERSION', '11.0.9-dev');
 }
 if (!defined('PLUGIN_MEDMETRICCMMS_VERSION')) {
-    define('PLUGIN_MEDMETRICCMMS_VERSION', '1.0.2');
+    define('PLUGIN_MEDMETRICCMMS_VERSION', '1.0.3');
 }
 if (!defined('PLUGIN_MEDMETRICCMMS_MIN_GLPI')) {
     define('PLUGIN_MEDMETRICCMMS_MIN_GLPI', '11.0.0');
