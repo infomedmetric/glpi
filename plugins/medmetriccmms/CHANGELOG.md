@@ -6,6 +6,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [1.0.1] - 2026-09-29
 
 ### Fixed
+- Fatal `Class "Analytics" not found` when rendering the central dashboard:
+  the `DISPLAY_CENTRAL` widget called the unqualified `Analytics` from the
+  global namespace, where no such class exists. It is now fully qualified.
 - "Plugin MedMetric CMMS has no install function!" on install: plugin classes
   are now loaded from `plugin_init_medmetriccmms()` (GLPI's plugin autoloader
   only maps `src/`, not the classic `inc/` layout) and defensively at the top
