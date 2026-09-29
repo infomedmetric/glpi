@@ -1,0 +1,199 @@
+# MedMetric CMMS translation template.
+# Copyright (C) 2026 MedMetric team
+# This file is distributed under the same license as the MedMetric CMMS plugin.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MedMetric CMMS 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-28 20:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: inc/equipment.class.php
+msgid "Equipment"
+msgid_plural "Equipment"
+msgstr ""
+
+#: inc/department.class.php
+msgid "Department"
+msgid_plural "Departments"
+msgstr ""
+
+#: inc/structure.class.php
+msgid "Structure"
+msgid_plural "Structures"
+msgstr ""
+
+#: inc/maintenance.class.php
+msgid "Maintenance"
+msgid_plural "Maintenances"
+msgstr ""
+
+#: inc/maintenanceplan.class.php
+msgid "Maintenance plan"
+msgid_plural "Maintenance plans"
+msgstr ""
+
+#: inc/workorder.class.php
+msgid "Work order"
+msgid_plural "Work orders"
+msgstr ""
+
+#: inc/notification.class.php
+msgid "Notification"
+msgid_plural "Notifications"
+msgstr ""
+
+#: inc/solution.class.php
+msgid "Solution"
+msgid_plural "Solutions"
+msgstr ""
+
+#: inc/inventory.class.php
+msgid "Spare part"
+msgid_plural "Spare parts"
+msgstr ""
+
+#: inc/vendor.class.php
+msgid "Vendor"
+msgid_plural "Vendors"
+msgstr ""
+
+#: inc/contract.class.php
+msgid "Contract"
+msgid_plural "Contracts"
+msgstr ""
+
+#: inc/aimodel.class.php
+msgid "AI model"
+msgid_plural "AI models"
+msgstr ""
+
+#: inc/log.class.php
+msgid "Log"
+msgid_plural "Logs"
+msgstr ""
+
+#: inc/report.class.php
+msgid "Report"
+msgid_plural "Reports"
+msgstr ""
+
+#: inc/analytics.class.php
+msgid "CMMS analytics"
+msgstr ""
+
+#: inc/analytics.class.php
+msgid "Open work orders"
+msgstr ""
+
+#: inc/analytics.class.php
+msgid "Overdue"
+msgstr ""
+
+#: inc/analytics.class.php
+msgid "Broken equipment"
+msgstr ""
+
+#: inc/analytics.class.php
+msgid "MTTR (min)"
+msgstr ""
+
+#: inc/analytics.class.php
+msgid "Low stock"
+msgstr ""
+
+#: inc/config.class.php front/config.form.php
+msgid "MedMetric CMMS settings"
+msgstr ""
+
+#: inc/config.class.php
+msgid "AI provider"
+msgstr ""
+
+#: inc/config.class.php
+msgid "API base URL"
+msgstr ""
+
+#: inc/config.class.php
+msgid "Default model"
+msgstr ""
+
+#: inc/config.class.php
+msgid "API key"
+msgstr ""
+
+#: inc/config.class.php
+msgid "OpenAI (GPT models)"
+msgstr ""
+
+#: inc/config.class.php
+msgid "Groq (fast Llama models)"
+msgstr ""
+
+#: front/workorder.form.php
+msgid "AI assistance"
+msgstr ""
+
+#: front/workorder.form.php
+msgid "Describe the symptoms"
+msgstr ""
+
+#: front/workorder.form.php
+msgid "Ask AI diagnosis"
+msgstr ""
+
+#: front/workorder.form.php
+msgid "Consumed spare parts"
+msgstr ""
+
+#: front/workorder.form.php
+msgid "Consume part"
+msgstr ""
+
+#: inc/notification.class.php
+msgid "Fault report"
+msgstr ""
+
+#: inc/notification.class.php
+msgid "Maintenance due"
+msgstr ""
+
+#: inc/notification.class.php
+msgid "Warranty expiry"
+msgstr ""
+
+#: inc/equipment.class.php
+msgid "In service"
+msgstr ""
+
+#: inc/equipment.class.php
+msgid "Out of service"
+msgstr ""
+
+#: inc/equipment.class.php
+msgid "Broken"
+msgstr ""
+
+#: inc/equipment.class.php
+msgid "Under maintenance"
+msgstr ""
+
+#: inc/equipment.class.php
+msgid "Retired"
+msgstr ""
+
+#: inc/maintenanceplan.class.php
+msgid "Generate planned preventive maintenance occurrences"
+msgstr ""
+
+#: inc/notification.class.php
+msgid "Raise maintenance and warranty alerts"
+msgstr ""

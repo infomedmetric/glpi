@@ -1,0 +1,36 @@
+{# ---------------------------------------------------------------------
+   MedMetric CMMS - maintenance overview template
+   --------------------------------------------------------------------- #}
+<div class="medmetric-card">
+    <h2 class="medmetric-card__title">{{ __('Preventive maintenance') }}</h2>
+    {% if plans is defined and plans is not empty %}
+        <table class="medmetric-table">
+            <thead>
+            <tr>
+                <th>{{ __('Name') }}</th>
+                <th>{{ __('Periodicity') }}</th>
+                <th>{{ __('Next occurrence') }}</th>
+                <th>{{ __('Active') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for plan in plans %}
+                <tr>
+                    <td>{{ plan.name }}</td>
+                    <td>{{ plan.periodicity }}</td>
+                    <td>{{ plan.next_creation ?: '-' }}</td>
+                    <td>
+                        {% if plan.is_active %}
+                            <span class="medmetric-badge medmetric-badge--done">{{ __('Yes') }}</span>
+                        {% else %}
+                            <span class="medmetric-badge medmetric-badge--neutral">{{ __('No') }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="medmetric-muted">{{ __('No maintenance plans defined yet.') }}</p>
+    {% endif %}
+</div>

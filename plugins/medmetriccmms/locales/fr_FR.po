@@ -1,0 +1,171 @@
+# MedMetric CMMS French (France) translation.
+# Copyright (C) 2026 MedMetric team
+# This file is distributed under the same license as the MedMetric CMMS plugin.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MedMetric CMMS 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-28 20:00+0000\n"
+"PO-Revision-Date: 2026-09-28 20:00+0000\n"
+"Last-Translator: MedMetric team\n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Equipment"
+msgid_plural "Equipment"
+msgstr[0] "Équipement"
+msgstr[1] "Équipements"
+
+msgid "Department"
+msgid_plural "Departments"
+msgstr[0] "Département"
+msgstr[1] "Départements"
+
+msgid "Structure"
+msgid_plural "Structures"
+msgstr[0] "Structure"
+msgstr[1] "Structures"
+
+msgid "Maintenance"
+msgid_plural "Maintenances"
+msgstr[0] "Maintenance"
+msgstr[1] "Maintenances"
+
+msgid "Maintenance plan"
+msgid_plural "Maintenance plans"
+msgstr[0] "Plan de maintenance"
+msgstr[1] "Plans de maintenance"
+
+msgid "Work order"
+msgid_plural "Work orders"
+msgstr[0] "Ordre de travail"
+msgstr[1] "Ordres de travail"
+
+msgid "Notification"
+msgid_plural "Notifications"
+msgstr[0] "Notification"
+msgstr[1] "Notifications"
+
+msgid "Solution"
+msgid_plural "Solutions"
+msgstr[0] "Solution"
+msgstr[1] "Solutions"
+
+msgid "Spare part"
+msgid_plural "Spare parts"
+msgstr[0] "Pièce de rechange"
+msgstr[1] "Pièces de rechange"
+
+msgid "Vendor"
+msgid_plural "Vendors"
+msgstr[0] "Fournisseur"
+msgstr[1] "Fournisseurs"
+
+msgid "Contract"
+msgid_plural "Contracts"
+msgstr[0] "Contrat"
+msgstr[1] "Contrats"
+
+msgid "AI model"
+msgid_plural "AI models"
+msgstr[0] "Modèle d'IA"
+msgstr[1] "Modèles d'IA"
+
+msgid "Log"
+msgid_plural "Logs"
+msgstr[0] "Journal"
+msgstr[1] "Journaux"
+
+msgid "Report"
+msgid_plural "Reports"
+msgstr[0] "Rapport"
+msgstr[1] "Rapports"
+
+msgid "CMMS analytics"
+msgstr "Analytique GMAO"
+
+msgid "Open work orders"
+msgstr "Ordres de travail ouverts"
+
+msgid "Overdue"
+msgstr "En retard"
+
+msgid "Broken equipment"
+msgstr "Équipements en panne"
+
+msgid "MTTR (min)"
+msgstr "MTTR (min)"
+
+msgid "Low stock"
+msgstr "Stock faible"
+
+msgid "MedMetric CMMS settings"
+msgstr "Paramètres MedMetric CMMS"
+
+msgid "AI provider"
+msgstr "Fournisseur d'IA"
+
+msgid "API base URL"
+msgstr "URL de base de l'API"
+
+msgid "Default model"
+msgstr "Modèle par défaut"
+
+msgid "API key"
+msgstr "Clé API"
+
+msgid "OpenAI (GPT models)"
+msgstr "OpenAI (modèles GPT)"
+
+msgid "Groq (fast Llama models)"
+msgstr "Groq (modèles Llama rapides)"
+
+msgid "AI assistance"
+msgstr "Assistance IA"
+
+msgid "Describe the symptoms"
+msgstr "Décrivez les symptômes"
+
+msgid "Ask AI diagnosis"
+msgstr "Demander un diagnostic IA"
+
+msgid "Consumed spare parts"
+msgstr "Pièces de rechange consommées"
+
+msgid "Consume part"
+msgstr "Consommer une pièce"
+
+msgid "Fault report"
+msgstr "Signalement de panne"
+
+msgid "Maintenance due"
+msgstr "Maintenance à échéance"
+
+msgid "Warranty expiry"
+msgstr "Expiration de garantie"
+
+msgid "In service"
+msgstr "En service"
+
+msgid "Out of service"
+msgstr "Hors service"
+
+msgid "Broken"
+msgstr "En panne"
+
+msgid "Under maintenance"
+msgstr "En maintenance"
+
+msgid "Retired"
+msgstr "Retiré"
+
+msgid "Generate planned preventive maintenance occurrences"
+msgstr "Générer les occurrences de maintenance préventive planifiées"
+
+msgid "Raise maintenance and warranty alerts"
+msgstr "Générer les alertes de maintenance et de garantie"

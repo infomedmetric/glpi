@@ -1,0 +1,171 @@
+# MedMetric CMMS Amharic translation.
+# Copyright (C) 2026 MedMetric team
+# This file is distributed under the same license as the MedMetric CMMS plugin.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MedMetric CMMS 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-28 20:00+0000\n"
+"PO-Revision-Date: 2026-09-28 20:00+0000\n"
+"Last-Translator: MedMetric team\n"
+"Language-Team: Amharic\n"
+"Language: am_ET\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Equipment"
+msgid_plural "Equipment"
+msgstr[0] "መሣሪያ"
+msgstr[1] "መሣሪያዎች"
+
+msgid "Department"
+msgid_plural "Departments"
+msgstr[0] "ክፍል"
+msgstr[1] "ክፍሎች"
+
+msgid "Structure"
+msgid_plural "Structures"
+msgstr[0] "መዋቅር"
+msgstr[1] "መዋቅሮች"
+
+msgid "Maintenance"
+msgid_plural "Maintenances"
+msgstr[0] "ጥገና"
+msgstr[1] "ጥገናዎች"
+
+msgid "Maintenance plan"
+msgid_plural "Maintenance plans"
+msgstr[0] "የጥገና እቅድ"
+msgstr[1] "የጥገና እቅዶች"
+
+msgid "Work order"
+msgid_plural "Work orders"
+msgstr[0] "የሥራ ትዕዛዝ"
+msgstr[1] "የሥራ ትዕዛዞች"
+
+msgid "Notification"
+msgid_plural "Notifications"
+msgstr[0] "ማሳወቂያ"
+msgstr[1] "ማሳወቂያዎች"
+
+msgid "Solution"
+msgid_plural "Solutions"
+msgstr[0] "መፍትሔ"
+msgstr[1] "መፍትሔዎች"
+
+msgid "Spare part"
+msgid_plural "Spare parts"
+msgstr[0] "ተክክል ክፍል"
+msgstr[1] "ተክክል ክፍሎች"
+
+msgid "Vendor"
+msgid_plural "Vendors"
+msgstr[0] "አቅራቢ"
+msgstr[1] "አቅራቢዎች"
+
+msgid "Contract"
+msgid_plural "Contracts"
+msgstr[0] "ውል"
+msgstr[1] "ውሎች"
+
+msgid "AI model"
+msgid_plural "AI models"
+msgstr[0] "የሰው ሰራሽ አስተውሎት ሞዴል"
+msgstr[1] "የሰው ሰራሽ አስተውሎት ሞዴሎች"
+
+msgid "Log"
+msgid_plural "Logs"
+msgstr[0] "መዝገብ"
+msgstr[1] "መዝገቦች"
+
+msgid "Report"
+msgid_plural "Reports"
+msgstr[0] "ሪፖርት"
+msgstr[1] "ሪፖርቶች"
+
+msgid "CMMS analytics"
+msgstr "የCMMS ትንተና"
+
+msgid "Open work orders"
+msgstr "ክፍት የሥራ ትዕዛዞች"
+
+msgid "Overdue"
+msgstr "መቆየቱ"
+
+msgid "Broken equipment"
+msgstr "የተበላሹ መሣሪያዎች"
+
+msgid "MTTR (min)"
+msgstr "MTTR (ደቂቃ)"
+
+msgid "Low stock"
+msgstr "ዝቅተኛ ክምችት"
+
+msgid "MedMetric CMMS settings"
+msgstr "የMedMetric CMMS ቅንብሮች"
+
+msgid "AI provider"
+msgstr "የሰው ሰራሽ አስተውሎት አቅራቢ"
+
+msgid "API base URL"
+msgstr "የAPI መሠረታዊ አድራሻ"
+
+msgid "Default model"
+msgstr "ነባሪ ሞዴል"
+
+msgid "API key"
+msgstr "የAPI ቁልፍ"
+
+msgid "OpenAI (GPT models)"
+msgstr "OpenAI (GPT ሞዴሎች)"
+
+msgid "Groq (fast Llama models)"
+msgstr "Groq (ፈጣን Llama ሞዴሎች)"
+
+msgid "AI assistance"
+msgstr "የሰው ሰራሽ አስተውሎት ድጋፍ"
+
+msgid "Describe the symptoms"
+msgstr "ምልክቶቹን ይግለጹ"
+
+msgid "Ask AI diagnosis"
+msgstr "የሰው ሰራሽ አስተውሎት ምርመራ ጠይቅ"
+
+msgid "Consumed spare parts"
+msgstr "የተጠቀሙ ተክክል ክፍሎች"
+
+msgid "Consume part"
+msgstr "ክፍል ተጠቀም"
+
+msgid "Fault report"
+msgstr "የብልሽት ሪፖርት"
+
+msgid "Maintenance due"
+msgstr "ጥገና መድረሱ"
+
+msgid "Warranty expiry"
+msgstr "የዋስትና መበቆል"
+
+msgid "In service"
+msgstr "በአገልግሎት ላይ"
+
+msgid "Out of service"
+msgstr "ከአገልግሎት ውጭ"
+
+msgid "Broken"
+msgstr "የተበላሸ"
+
+msgid "Under maintenance"
+msgstr "በጥገና ላይ"
+
+msgid "Retired"
+msgstr "የተለቀቀ"
+
+msgid "Generate planned preventive maintenance occurrences"
+msgstr "የታቀዱ የመከላከያ ጥገና ክንውኖችን መፍጠር"
+
+msgid "Raise maintenance and warranty alerts"
+msgstr "የጥገና እና የዋስትና ማንቂያዎችን ማስነሳት"

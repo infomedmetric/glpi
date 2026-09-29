@@ -4,6 +4,7 @@
 !/marketplace/.gitkeep
 /plugins/*
 !/plugins/.gitkeep
+!/plugins/medmetriccmms/
 /files/*/*
 !/files/*/.gitkeep
 /.buildpath
@@ -49,7 +50,6 @@ phpstan.neon
 *.phar
 .env
 /resources/.illustrations_translations.php
-/phpunit/files/*
 /.dump/
 /tests/js/coverage/
 .DS_Store
@@ -59,3 +59,4 @@ phpstan.neon
 /tests/e2e/output/
 /tests/e2e/.env.local
 !/tests/e2e/.env
+public/medequip-cmms-full.zip
