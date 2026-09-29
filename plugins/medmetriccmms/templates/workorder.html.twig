@@ -1,0 +1,30 @@
+{# ---------------------------------------------------------------------
+   MedMetric CMMS - work order summary template
+   --------------------------------------------------------------------- #}
+<div class="medmetric-card">
+    <h2 class="medmetric-card__title">{{ __('Work order') }}</h2>
+    {% if workorder is defined and workorder is not empty %}
+        <table class="medmetric-table">
+            <tbody>
+            <tr>
+                <th>{{ __('Code') }}</th>
+                <td>{{ workorder.code }}</td>
+            </tr>
+            <tr>
+                <th>{{ __('Title') }}</th>
+                <td>{{ workorder.name }}</td>
+            </tr>
+            <tr>
+                <th>{{ __('Status') }}</th>
+                <td><span class="medmetric-badge {{ workorder.badge_class }}">{{ workorder.status_label }}</span></td>
+            </tr>
+            <tr>
+                <th>{{ __('Downtime (min)') }}</th>
+                <td>{{ workorder.downtime_duration }}</td>
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p class="medmetric-muted">{{ __('No work order selected.') }}</p>
+    {% endif %}
+</div>

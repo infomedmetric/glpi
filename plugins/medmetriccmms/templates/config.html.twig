@@ -1,0 +1,26 @@
+{# ---------------------------------------------------------------------
+   MedMetric CMMS - configuration summary template
+   --------------------------------------------------------------------- #}
+<div class="medmetric-card">
+    <h2 class="medmetric-card__title">{{ __('MedMetric CMMS settings') }}</h2>
+    <table class="medmetric-table">
+        <tbody>
+        <tr>
+            <th>{{ __('AI provider') }}</th>
+            <td>{{ config.ai_provider }}</td>
+        </tr>
+        <tr>
+            <th>{{ __('Default model') }}</th>
+            <td>{{ config.ai_model }}</td>
+        </tr>
+        <tr>
+            <th>{{ __('API base URL') }}</th>
+            <td>{{ config.ai_base_url }}</td>
+        </tr>
+        <tr>
+            <th>{{ __('API key') }}</th>
+            <td>{{ config.ai_api_key ? '••••••••' : __('(not set)') }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,164 @@
+/* ---------------------------------------------------------------------
+   MedMetric CMMS - plugin styles (medical teal theme)
+   --------------------------------------------------------------------- */
+
+:root {
+    --medmetric-teal: #0f766e;
+    --medmetric-teal-dark: #115e59;
+    --medmetric-teal-light: #ccfbf1;
+    --medmetric-danger: #b91c1c;
+    --medmetric-warning: #b45309;
+    --medmetric-ok: #15803d;
+    --medmetric-neutral: #475569;
+}
+
+/* Cards */
+.medmetric-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .06);
+}
+
+.medmetric-card__title {
+    color: var(--medmetric-teal-dark);
+    font-weight: 600;
+    margin: 0 0 .75rem;
+    font-size: 1.05rem;
+}
+
+/* Badges */
+.medmetric-badge {
+    display: inline-block;
+    padding: .15rem .6rem;
+    border-radius: 9999px;
+    font-size: .78rem;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.medmetric-badge--new       { background: #e0f2fe; color: #075985; }
+.medmetric-badge--assigned  { background: #ede9fe; color: #5b21b6; }
+.medmetric-badge--progress  { background: var(--medmetric-teal-light); color: var(--medmetric-teal-dark); }
+.medmetric-badge--waiting   { background: #fef3c7; color: var(--medmetric-warning); }
+.medmetric-badge--done      { background: #dcfce7; color: var(--medmetric-ok); }
+.medmetric-badge--cancelled { background: #fee2e2; color: var(--medmetric-danger); }
+.medmetric-badge--neutral   { background: #f1f5f9; color: var(--medmetric-neutral); }
+
+/* KPI tiles */
+.medmetric-kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .75rem;
+}
+
+.medmetric-kpi {
+    text-align: center;
+    padding: .75rem .5rem;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.medmetric-kpi__value {
+    font-size: 1.35rem;
+    margin-bottom: .25rem;
+}
+
+.medmetric-kpi__label {
+    font-size: .78rem;
+    color: var(--medmetric-neutral);
+}
+
+/* Bars */
+.medmetric-bars {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.medmetric-bar {
+    display: grid;
+    grid-template-columns: 160px 1fr 48px;
+    align-items: center;
+    gap: .75rem;
+}
+
+.medmetric-bar__label {
+    font-size: .82rem;
+    color: var(--medmetric-neutral);
+    text-align: right;
+}
+
+.medmetric-bar__track {
+    display: block;
+    background: #f1f5f9;
+    border-radius: 9999px;
+    height: 12px;
+    overflow: hidden;
+}
+
+.medmetric-bar__fill {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--medmetric-teal), var(--medmetric-teal-dark));
+    border-radius: 9999px;
+}
+
+.medmetric-bar__fill--alt {
+    background: linear-gradient(90deg, #38bdf8, #0284c7);
+}
+
+.medmetric-bar__value {
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+/* Tables */
+.medmetric-table th {
+    text-align: left;
+    color: var(--medmetric-teal-dark);
+    font-size: .85rem;
+}
+
+.medmetric-table td,
+.medmetric-table th {
+    padding: .4rem .6rem;
+}
+
+/* Misc */
+.medmetric-muted {
+    color: #64748b;
+    font-size: .85rem;
+}
+
+.medmetric-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.medmetric-list li {
+    padding: .25rem 0;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.medmetric-label {
+    display: block;
+    font-size: .82rem;
+    color: var(--medmetric-neutral);
+    margin-bottom: .25rem;
+}
+
+.medmetric-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.medmetric-widget {
+    margin-bottom: 1rem;
+}

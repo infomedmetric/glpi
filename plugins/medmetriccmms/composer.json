@@ -1,0 +1,39 @@
+{
+    "name": "medmetric/medmetriccmms",
+    "description": "MedMetric CMMS - Computerized Maintenance Management System for hospitals, built on GLPI 11",
+    "type": "glpi-plugin",
+    "license": "GPL-3.0-or-later",
+    "homepage": "https://github.com/medmetric/medmetriccmms",
+    "authors": [
+        {
+            "name": "MedMetric team",
+            "homepage": "https://github.com/medmetric"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "GlpiPlugin\\Medmetriccmms\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GlpiPlugin\\Medmetriccmms\\Tests\\Unit\\": "tests/Unit/",
+            "GlpiPlugin\\Medmetriccmms\\Tests\\Integration\\": "tests/Integration/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --bootstrap tests/bootstrap.php tests",
+        "lint": "for f in $(git ls-files '*.php'); do php -l \"$f\" || exit 1; done"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

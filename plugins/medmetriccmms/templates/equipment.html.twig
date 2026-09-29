@@ -1,0 +1,30 @@
+{# ---------------------------------------------------------------------
+   MedMetric CMMS - equipment summary template
+   --------------------------------------------------------------------- #}
+<div class="medmetric-card">
+    <h2 class="medmetric-card__title">{{ __('Medical equipment') }}</h2>
+    {% if equipment is defined and equipment is not empty %}
+        <table class="medmetric-table">
+            <tbody>
+            <tr>
+                <th>{{ __('Name') }}</th>
+                <td>{{ equipment.name }}</td>
+            </tr>
+            <tr>
+                <th>{{ __('Serial number') }}</th>
+                <td>{{ equipment.serial }}</td>
+            </tr>
+            <tr>
+                <th>{{ __('Status') }}</th>
+                <td><span class="medmetric-badge medmetric-badge--progress">{{ equipment.status_label }}</span></td>
+            </tr>
+            <tr>
+                <th>{{ __('Next maintenance') }}</th>
+                <td>{{ equipment.next_maintenance ?: '-' }}</td>
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p class="medmetric-muted">{{ __('No equipment recorded yet.') }}</p>
+    {% endif %}
+</div>

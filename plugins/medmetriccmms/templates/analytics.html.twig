@@ -1,0 +1,16 @@
+{# ---------------------------------------------------------------------
+   MedMetric CMMS - analytics KPI grid template
+   --------------------------------------------------------------------- #}
+<div class="medmetric-card">
+    <h2 class="medmetric-card__title">{{ __('CMMS analytics') }}</h2>
+    <div class="medmetric-kpis">
+        {% for kpi in kpis %}
+            <div class="medmetric-kpi">
+                <div class="medmetric-kpi__value medmetric-badge {{ kpi.badge|default('medmetric-badge--neutral') }}">
+                    {{ kpi.value }}
+                </div>
+                <div class="medmetric-kpi__label">{{ kpi.label }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
