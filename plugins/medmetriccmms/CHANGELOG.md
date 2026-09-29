@@ -3,6 +3,21 @@
 All notable changes to MedMetric CMMS are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.3] - 2026-09-29
+
+### Fixed
+- Fatal `Attempted to call an undefined method named "getMenuContent"` on every
+  page load: GLPI calls `$type::getMenuContent()` on every class listed in the
+  `MENU_TOADD` hook (`src/Html.php`), but `Analytics` is a plain helper class
+  that does not extend `CommonDBTM` and therefore does not inherit
+  `CommonGLPI::getMenuContent()`. `Analytics` now implements it, so the Tools >
+  Analytics entry is rendered and the menu no longer fatals.
+
+### Notes
+- Upgrading from 1.0.2 runs `sql/upgrade/1.0.2_to_1.0.3.sql`, which adds the
+  `calibration_reminder_days` column to maintenance plans. It is additive with a
+  default and unused by the current UI. Fresh installs are unaffected.
+
 ## [1.0.2] - 2026-09-29
 
 ### Fixed

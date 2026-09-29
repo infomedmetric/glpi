@@ -27,6 +27,28 @@ if (!defined('GLPI_ROOT')) {
 class Analytics
 {
     /**
+     * Menu entry for the Tools menu.
+     *
+     * Analytics is a plain helper class and does not extend CommonDBTM, so it
+     * does not inherit CommonGLPI::getMenuContent(). GLPI calls
+     * `$type::getMenuContent()` on every class listed in the MENU_TOADD hook
+     * (src/Html.php), so this method is mandatory for that registration.
+     *
+     * @return array|false
+     */
+    public static function getMenuContent() {
+        if (!Session::haveRight(Profile::RIGHTNAME, READ)) {
+            return false;
+        }
+
+        return [
+            'title' => __('Analytics'),
+            'page'  => '/plugins/medmetriccmms/front/analytics.php',
+            'icon'  => 'ti-chart-bar',
+        ];
+    }
+
+    /**
      * KPI snapshot for a period.
      *
      * @param string $date_from Y-m-d
